@@ -15,7 +15,7 @@ import android.widget.ImageView;
 public class ImageAdapter extends BaseAdapter{
 	private Context mContext;
 	File sdCard = Environment.getExternalStorageDirectory();
-	File directory = new File(sdCard.getAbsolutePath(), "Clothes Matching Application");
+	File directory = new File(sdCard.getAbsolutePath(), "ClothesMatchingApplication");
 	public File[] names = directory.listFiles();
 	public Bitmap[] bits = null;
 
