@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,21 +15,20 @@ import android.widget.ImageView;
 public class ImageAdapter extends BaseAdapter{
 	
 	private Context mContext;
-	File sdCard = Environment.getExternalStorageDirectory();
-	File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
-	public File[] names = directory.listFiles();
-	Log.d("Files", "Size: "+ file.length);
-	
-	public Bitmap[] bits = null;
+	public Bitmap[] bits;
 	
 	
 	
 	public ImageAdapter(Context c){
+		File sdCard = Environment.getExternalStorageDirectory();
+		File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
+		File[] names = directory.listFiles();
+		Log.d("Files", "Size: "+ names.length);
+		
 	    mContext = c;
 	    for (int i=0; i< names.length; i++){
             Bitmap bitmap = BitmapFactory.decodeFile(names[i].getAbsolutePath());
             bits[i]=bitmap;
-            
         }
 	}
 	 
