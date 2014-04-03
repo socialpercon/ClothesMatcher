@@ -20,16 +20,16 @@ public class ImageAdapter extends BaseAdapter{
 	Log.d("Files", "Size: "+ file.length);
 	
 	public Bitmap[] bits = null;
-	for (int i=0; i< names.length; i++){
-		Bitmap bitmap = BitmapFactory.decodeFile(names[i].getAbsolutePath());
-		bits[i]=bitmap;	
-		
-	}
+	
 	
 	
 	public ImageAdapter(Context c){
 	    mContext = c;
-	    
+	    for (int i=0; i< names.length; i++){
+            Bitmap bitmap = BitmapFactory.decodeFile(names[i].getAbsolutePath());
+            bits[i]=bitmap;
+            
+        }
 	}
 	 
 	public int getCount() {
