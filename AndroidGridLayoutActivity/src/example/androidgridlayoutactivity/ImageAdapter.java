@@ -24,6 +24,7 @@ public class ImageAdapter extends BaseAdapter{
 		File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
 		File[] names = directory.listFiles();
 		Log.d("Files", "Size: "+ names.length);
+		bits = new Bitmap[names.length];
 		
 	    mContext = c;
 	    for (int i=0; i< names.length; i++){
