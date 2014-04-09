@@ -5,6 +5,7 @@ import com.j256.ormlite.android.*;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.widget.ImageView;
 public class ImageAdapter extends BaseAdapter{
 	
 	private Context mContext;
-	public Bitmap[] bits;
+	public Uri[] bits;
 	
 	
 	
@@ -25,12 +26,12 @@ public class ImageAdapter extends BaseAdapter{
 		File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
 		File[] names = directory.listFiles();
 		Log.d("Files", "Size: "+ names.length);
-		bits = new Bitmap[names.length];
+		bits = new Uri[names.length];
 		
 	    mContext = c;
 	    for (int i=0; i< names.length; i++){
-            Bitmap bitmap = BitmapFactory.decodeFile(names[i].getAbsolutePath());
-            bits[i]=bitmap;
+            Uri uri = Uri.parse(names[i].getAbsolutePath());
+            bits[i]=uri;
         }
 	}
 	 
@@ -53,7 +54,7 @@ public class ImageAdapter extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent){
 		
 	    ImageView imageView = new ImageView(mContext);
-	    imageView.setImageBitmap(bits[position]);
+	    imageView.setImageURI(bits[position]);
 	    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 	    imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
 	    return imageView;
