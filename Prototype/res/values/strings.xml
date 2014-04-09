@@ -5,7 +5,28 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="AddClothingItem">AddNewClothingItem</string>
-    
     <string name="AddNewClothes">Add A New Clothing Item</string>
+    <string name="ToExpertHome">Move to Expert Home</string>
+    <string name="MoveToUserHome">Move To User Home</string>
+    <string name="title_activity_user_home1">UserHome1</string>
+    <string name="title_activity_expert_home1">ExpertHome1</string>
+    <string name="EditOldEntry">Edit Old Clothing Entry</string>
+    <string name="title_activity_expert_categories">ExpertCategories</string>
+    <string name="LongSleeveShirtsCategory">Long Sleeve Shirts</string>
+    <string name="ShortSleeveShirtsCategory">Short Sleeve Shirts</string>
+    <string name="SkirtsCategory">Skirts</string>
+    <string name="PantsCategory">Pants</string>
+    <string name="ShoesCategory">Shoes</string>
+    <string name="title_activity_new_entry_home">NewEntryHome</string>
+    <string name="title_activity_edit_home1">EditHome1</string>
+    <string name="MainTitle">Team EMME Clothes Matching Application</string>
+    <string name="title_activity_shoes_home">ShoesHome</string>
+    <string name="title_activity_short_sleeve_shirts_home">ShortSleeveShirtsHome</string>
+    <string name="title_activity_long_sleeve_shirts_home">LongSleeveShirtsHome</string>
+    <string name="title_activity_pants_home">PantsHome</string>
+    <string name="title_activity_skirts_home">SkirtsHome</string>
+    <string name="AddMatches">Add Matches</string>
+    <string name="DeleteMatches">Delete Matches</string>
+    <string name="title_activity_old_entry_home">OldEntryHome</string>
 
 </resources>

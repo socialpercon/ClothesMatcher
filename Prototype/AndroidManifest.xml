@@ -7,13 +7,14 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.CAMERA" />
-	
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -27,6 +28,50 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.UserHome1"
+            android:label="@string/title_activity_user_home1" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.ExpertHome1"
+            android:label="@string/title_activity_expert_home1" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.ExpertCategories"
+            android:label="@string/title_activity_expert_categories" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.NewEntryHome"
+            android:label="@string/title_activity_new_entry_home" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.EditHome1"
+            android:label="@string/title_activity_edit_home1" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.ShoesHome"
+            android:label="@string/title_activity_shoes_home" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.ShortSleeveShirtsHome"
+            android:label="@string/title_activity_short_sleeve_shirts_home" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.LongSleeveShirtsHome"
+            android:label="@string/title_activity_long_sleeve_shirts_home" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.PantsHome"
+            android:label="@string/title_activity_pants_home" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.SkirtsHome"
+            android:label="@string/title_activity_skirts_home" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.OldEntryHome"
+            android:label="@string/title_activity_old_entry_home" >
         </activity>
     </application>
 

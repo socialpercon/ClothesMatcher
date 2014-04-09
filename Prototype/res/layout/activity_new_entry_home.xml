@@ -6,33 +6,37 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".NewEntryHome" >
 
-    <Button
-        android:id="@+id/buttonToUserHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:onClick="moveToUserHome"
-        android:text="@string/MoveToUserHome" />
-
-    <Button
-        android:id="@+id/buttonToExpertHome"
+    <Gallery
+        android:id="@+id/gallery1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="moveToExpertHome"
-        android:text="@string/ToExpertHome" />
+        android:layout_marginBottom="130dp" />
 
-    <TextView
-        android:id="@+id/textView1"
+
+    <Button
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/buttonToExpertHome"
-        android:text="@string/MainTitle"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:text="@string/DeleteMatches" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:text="@string/AddMatches" />
+
+    <ImageView
+        android:id="@+id/imageViewMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

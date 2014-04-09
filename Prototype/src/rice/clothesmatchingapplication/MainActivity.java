@@ -15,8 +15,6 @@ import android.view.Menu;
 import android.view.View;
 
 public class MainActivity extends Activity {
-	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 0;
-	public static final int MEDIA_TYPE_IMAGE = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,29 +29,24 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	public void Camera(View view) {
-		Intent CameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		File imagesFolder = new File(Environment.getExternalStorageDirectory(), "ClothesMatchingApplication");
-		imagesFolder.mkdirs();
-	    File image = new File(imagesFolder, "IMG_" + getDate() + ".jpg");
-	    Uri uriSavedImage = Uri.fromFile(image);
-	    CameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
-		startActivityForResult(CameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	public void moveToUserHome(View view){
+		Intent move = new Intent(this, UserHome1.class);
+		startActivity(move);
 	}
 	
-	public String getDate(){
-		Date currentDate = new Date();
-		String dateString = "" + currentDate;
-		return dateString;
+	public void moveToExpertHome(View view){
+		Intent move = new Intent(this, ExpertHome1.class);
+		startActivity(move);
 	}
-
+	
+	
 	public final class FeedReaderContract {
 	    // To prevent someone from accidentally instantiating the contract class,
 	    // give it an empty constructor.
-	    public FeedReaderContract() {}
+	public FeedReaderContract() {}
 
 	    /* Inner class that defines the table contents */
-	    abstract class FeedEntry implements BaseColumns {
+	abstract class FeedEntry implements BaseColumns {
 	        public static final String TABLE_NAME = "entry";
 	        public static final String COLUMN_NAME_ENTRY_ID = "entryid";
 	        public static final String COLUMN_NAME_TITLE = "title";
