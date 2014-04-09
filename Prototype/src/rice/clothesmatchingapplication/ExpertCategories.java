@@ -20,7 +20,6 @@ public class ExpertCategories extends Activity {
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 0;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	public int Category = 0;
-	public final String IMAGE_PATH = "IMAGEPATH";
 	public final static String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	
 	@Override
@@ -62,39 +61,33 @@ public class ExpertCategories extends Activity {
 	}
 	
 	public void moveToCamera(View view) {
-		Intent CameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		File imagesFolder = new File(Environment.getExternalStorageDirectory(), "ClothesMatchingApplication");
 		imagesFolder.mkdirs();
 	    File image = new File(imagesFolder, "IMG_" + getDate() + ".jpg");
 	    Uri uriSavedImage = Uri.fromFile(image);
-	    CameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
-	    CameraIntent.putExtra(IMAGE_PATH, image.getAbsolutePath());
-	    startActivityForResult(CameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+	    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+	    startActivityForResult(cameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 		   
 	}
 	
 	public String getDate(){
-		int Second = Calendar.SECOND; 
-		int Minute = Calendar.MINUTE;
-		int Hour = Calendar.HOUR_OF_DAY; 
-		int Month = Calendar.MONTH; 
-		int Day = Calendar.DAY_OF_MONTH;
-		int Year = Calendar.YEAR;
-		String dateString = ""+Year+Month+Day+Hour+Minute+Second;
+		int second = Calendar.SECOND; 
+		int minute = Calendar.MINUTE;
+		int hour = Calendar.HOUR_OF_DAY; 
+		int month = Calendar.MONTH; 
+		int day = Calendar.DAY_OF_MONTH;
+		int year = Calendar.YEAR;
+		String dateString = ""+year+month+day+hour+minute+second;
 		return dateString;
 	}
-
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
 		if (requestCode==CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
 			if(resultCode==RESULT_OK){
-				Log.d("File", "Path: " + data.getData());
-				//String path = Camera.getStringExtra(IMAGE_PATH);
 				Intent move = new Intent(this, NewEntryHome.class);
-				//Log.d("File", "Path: " + path);
-				//move.putExtra(EXTRA_MESSAGE, path);
 				startActivity(move);
-				
 			}
 			else if (resultCode == RESULT_CANCELED){
 				
