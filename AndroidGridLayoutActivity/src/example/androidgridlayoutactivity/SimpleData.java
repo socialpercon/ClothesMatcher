@@ -1,9 +1,8 @@
 package example.androidgridlayoutactivity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.orm.dsl.Collection;
 
 /**
  * A simple demonstration object we are creating and persisting to the database.
@@ -14,34 +13,39 @@ public class SimpleData {
 	@DatabaseField(generatedId = true)
 	int id;
 	@DatabaseField(index = true)
-	String string;
+	String fileName;
 	@DatabaseField
-	long millis;
+	String type;
 	@DatabaseField
-	Date date;
+	String color;
 	@DatabaseField
-	boolean even;
+	String explain;
+	@DatabaseField
+	Collection matches;
 
 	SimpleData() {
 		// needed by ormlite
 	}
 
-	public SimpleData(long millis) {
-		this.date = new Date(millis);
-		this.string = (millis % 1000) + "ms";
-		this.millis = millis;
-		this.even = ((millis % 2) == 0);
-	}
+public SimpleData(int id, String fileName, String type, String color, String explain, Collection matches) {
+	this.id = id;
+	this.fileName = fileName;
+	this.type = type;
+	this.color = color;
+	this.explain = explain;
+	this.matches = matches;
+}
+
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("id=").append(id);
-		sb.append(", ").append("string=").append(string);
-		sb.append(", ").append("millis=").append(millis);
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.S");
-		sb.append(", ").append("date=").append(dateFormatter.format(date));
-		sb.append(", ").append("even=").append(even);
+		sb.append(", ").append("file name =").append(fileName);
+		sb.append(", ").append("type =").append(type);
+		sb.append(", ").append("color =").append(color);
+		sb.append(", ").append("explanation =").append(explain);
+		sb.append(", ").append("List of matches =").append(matches.toString());
 		return sb.toString();
 	}
 }

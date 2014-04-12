@@ -38,14 +38,20 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
 			}
 
 			// here we try inserting data in the on-create as a test
-			RuntimeExceptionDao<SimpleData, Integer> dao = getSimpleDataDao();
-			long millis = System.currentTimeMillis();
-			// create some entries in the onCreate
-			SimpleData simple = new SimpleData(millis);
-			dao.create(simple);
-			simple = new SimpleData(millis + 1);
-			dao.create(simple);
-			Log.i(DatabaseHelper.class.getName(), "created new entries in onCreate: " + millis);
+			
+			
+			
+			
+//			RuntimeExceptionDao<SimpleData, Integer> dao = getSimpleDataDao();
+//			long millis = System.currentTimeMillis();
+//			
+//			
+//			// create some entries in the onCreate
+//			SimpleData simple = new SimpleData(millis);
+//			dao.create(simple);
+//			simple = new SimpleData(millis + 1);
+//			dao.create(simple);
+//			Log.i(DatabaseHelper.class.getName(), "created new entries in onCreate: " + millis);
 		}
 
 		/**

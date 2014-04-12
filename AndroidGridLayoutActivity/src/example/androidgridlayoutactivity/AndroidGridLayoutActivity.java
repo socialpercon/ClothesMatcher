@@ -26,9 +26,12 @@ public class AndroidGridLayoutActivity extends OrmLiteBaseActivity<DatabaseHelpe
 	        // Instance of ImageAdapter Class
 	    gridView.setAdapter(new ImageAdapter(this));
 	    
+	    
+	    //need to load all gridView items into database
 	    TextView tv = new TextView(this);
-		doSampleDatabaseStuff("onCreate", tv);
+		doSampleDatabaseStuff("onCreate", gridView, tv);
 		setContentView(tv);
+		
 	}
 	
 	@Override
@@ -38,7 +41,8 @@ public class AndroidGridLayoutActivity extends OrmLiteBaseActivity<DatabaseHelpe
 		return true;
 	}
 	
-	private void doSampleDatabaseStuff(String action, TextView tv){
+	
+	private void doSampleDatabaseStuff(String action, GridView gridView, TextView tv){
 		RuntimeExceptionDao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
 		// query for all of the data objects in the database
 		List<SimpleData> list = simpleDao.queryForAll();
@@ -61,12 +65,12 @@ public class AndroidGridLayoutActivity extends OrmLiteBaseActivity<DatabaseHelpe
 			simpleC++;
 		}
 
-		int createNum;
-		do {
-			createNum = new Random().nextInt(3) + 1;
-		} while (createNum == list.size());
-		for (int i = 0; i < createNum; i++) {
+		
+		
+		int totalLength = gridView.getMeasuredWidth() * gridView.getMeasuredHeight();
+		for (int i = 0; i < totalLength; i++) {
 			// create a new simple object
+			
 			long millis = System.currentTimeMillis();
 			SimpleData simple = new SimpleData(millis);
 			// store it in the database

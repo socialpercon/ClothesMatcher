@@ -19,7 +19,6 @@ public class ImageAdapter extends BaseAdapter{
 	public Bitmap[] bits;
 		
 
-
 	public static int calculateInSampleSize(BitmapFactory.Options options, int reqHeight, int reqWidth){
 
 		final int height = options.outHeight;
