@@ -53,7 +53,7 @@ public class ImageAdapter extends BaseAdapter{
 	    	int pictureRotation = getPictureRotation(names[i].getAbsolutePath());
 	    	Matrix matrix = new Matrix();
 	    	matrix.postRotate(pictureRotation);
-	    	bitmap = Bitmap.createBitmap(bitmap, 0, 0, 250, 250, matrix, true);
+	    	bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 	    	bits[i]=bitmap;
         }
 	}
