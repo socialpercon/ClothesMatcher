@@ -1,5 +1,7 @@
 package rice.clothesmatchingapplication;
 
+import java.io.IOException;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +22,11 @@ public class EditHome1 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_home1);
 		GridView gridView = (GridView) findViewById(R.id.EditGridView);
-	    gridView.setAdapter(new ImageAdapter(this));
+	    try {
+			gridView.setAdapter(new ImageAdapter(this));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	     
 	    gridView.setOnItemClickListener (new OnItemClickListener(){
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {

@@ -1,9 +1,11 @@
 package rice.clothesmatchingapplication;
 import java.io.File;
+import java.io.IOException;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
@@ -17,8 +19,6 @@ public class ImageAdapter extends BaseAdapter{
 
 	private Context mContext;
 	public Bitmap[] bits;
-		
-
 
 	public static int calculateInSampleSize(BitmapFactory.Options options, int reqHeight, int reqWidth){
 
@@ -39,7 +39,7 @@ public class ImageAdapter extends BaseAdapter{
 	}
 	
 	
-	public ImageAdapter(Context c){
+	public ImageAdapter(Context c) throws IOException{
 		File sdCard = Environment.getExternalStorageDirectory();
 		File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
 		File[] names = directory.listFiles();
@@ -49,24 +49,32 @@ public class ImageAdapter extends BaseAdapter{
 	    mContext = c;
 	    
 	    for (int i=0; i< names.length; i++){
-	    
 	    	Bitmap bitmap = decodeBitmap(names[i].getAbsolutePath(),250,250);
-//	    	ExifInterface exif = new ExifInterface(bitmap);
-	//    	int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-	 //   	int rotationInDegrees = exifToDegrees(rotation);
-	    	
+	    	int pictureRotation = getPictureRotation(names[i].getAbsolutePath());
+	    	Matrix matrix = new Matrix();
+	    	matrix.postRotate(pictureRotation);
+	    	bitmap = Bitmap.createBitmap(bitmap, 0, 0, 250, 250, matrix, true);
 	    	bits[i]=bitmap;
         }
 	}
-/**	
+	
 	private static int exifToDegrees(int exifOrientation) {        
 	    if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) { return 90; } 
 	    else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180) {  return 180; } 
 	    else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270) {  return 270; }            
 	    return 0;    
 	 }
-	**/
+	
+	public int getPictureRotation(String path) throws IOException{
+		ExifInterface exif = new ExifInterface(path);
+    	int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+    	int rotationInDegrees = exifToDegrees(rotation);
+    	return rotationInDegrees;
+	}
+	
 	public static Bitmap decodeBitmap(String names, int reqWidth, int reqHeight) {
+		
+		
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
 		BitmapFactory.decodeFile(names,options);
