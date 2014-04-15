@@ -28,5 +28,7 @@
     <string name="AddMatches">Add Matches</string>
     <string name="DeleteMatches">Delete Matches</string>
     <string name="title_activity_old_entry_home">OldEntryHome</string>
+    <string name="finishedEditing">Finished Editing</string>
+    <string name="ClothingName">Clothing Name:</string>
 
 </resources>

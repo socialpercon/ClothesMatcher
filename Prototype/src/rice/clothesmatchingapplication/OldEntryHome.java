@@ -30,7 +30,7 @@ public static OldEntryHome instance;
 	
 	private final String LOG_TAG = getClass().getSimpleName();
 	private DatabaseHelper databaseHelper = null;
-	public final String TAG = "AndroidGridLayoutActivity";
+	public final String TAG = "OldEntryHome";
 	public ImageAdapter imageAdapter; 
 
 	@Override
@@ -49,7 +49,10 @@ public static OldEntryHome instance;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		doSampleDatabaseStuff();
 	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -73,34 +76,28 @@ public static OldEntryHome instance;
 		return databaseHelper;
 	}
 
-	private void doSampleDatabaseStuff(String action, TextView tv) {
+	private void doSampleDatabaseStuff() {
 		try {
 			// our string builder for building the content-view
 			StringBuilder sb = new StringBuilder();
-			doSimpleDatabaseStuff(action, sb);
-			sb.append("------------------------------------------\n");
-			tv.setText(sb.toString());
-				
+			doSimpleDatabaseStuff(sb);
+			
 			Log.i(LOG_TAG, "Done with page at " + System.currentTimeMillis());
 		} catch (SQLException e) {
 			Log.e(LOG_TAG, "Database exception", e);
-			tv.setText("Database exeption: " + e);
 			return;
 		}
 	}
 	
-	private StringBuilder doSimpleDatabaseStuff(String action, StringBuilder sb) throws SQLException, java.sql.SQLException {
+	private StringBuilder doSimpleDatabaseStuff(StringBuilder sb) throws SQLException, java.sql.SQLException {
 		// get our dao
 		Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
 		// query for all of the data objects in the database
 		List<SimpleData> list = simpleDao.queryForAll();
-		sb.append("got ").append(list.size()).append(" SimpleData entries in ").append(action).append("\n");
-		sb.append("------------------------------------------\n");
-
+		
 		String[] fileNames = imageAdapter.getFilePaths();
 		String name = "";
 		Boolean nameStatus = false;
-		int i=1;
 		for (String s: fileNames)
 		{
 			name = s;
@@ -113,16 +110,11 @@ public static OldEntryHome instance;
 				}
 			
 			}
-			Log.d("nameStatus", "" + nameStatus);
 			//maybe the createifnotexist function would have been easier but oh well
 		if (nameStatus==false)
 		{
-		SimpleData simple = new SimpleData(name,"Pants" ,"Blue");
+		SimpleData simple = new SimpleData("Pants" ,"Blue");
 		simpleDao.create(simple);
-		sb.append("------------------------------------------\n");
-		sb.append("created SimpleData entry #").append(i).append(":\n");
-		sb.append(simple).append("\n");
-		i++;
 		}
 		
 		nameStatus =false;
@@ -139,6 +131,7 @@ public static OldEntryHome instance;
 		}
 		return sb;
 	}
+	
 }
 
 

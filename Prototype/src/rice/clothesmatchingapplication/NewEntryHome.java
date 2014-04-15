@@ -1,6 +1,9 @@
 package rice.clothesmatchingapplication;
 
 import java.io.File;
+import java.sql.SQLException;
+
+import com.j256.ormlite.dao.Dao;
 
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,6 +18,9 @@ import android.widget.ImageView;
 
 public class NewEntryHome extends Activity {
 
+	private final String LOG_TAG = getClass().getSimpleName();
+	private DatabaseHelper databaseHelper = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,6 +35,7 @@ public class NewEntryHome extends Activity {
 			final Cursor cursor = getContentResolver()
 			        .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, 
 			               null, MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC");
+			
 			if (cursor.moveToFirst()) {
 			    String imageLocation = cursor.getString(1);
 			    File imageFile = new File(imageLocation);
@@ -36,9 +43,38 @@ public class NewEntryHome extends Activity {
 			        loadIntoImageview(imageLocation);
 			    }
 			} 
+			
+			//loadItemIntoDatabase(name, type);
 	
 	}
+	
+	public void loadItemIntoDatabase(String ClothesName, String ClothesType){
+		try {
+			Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
+			SimpleData simple = new SimpleData(ClothesName, ClothesType);
+			simpleDao.createIfNotExists(simple);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	protected void onDestroy(){
+		super.onDestroy();
+		if(databaseHelper!=null){
+			databaseHelper.close();
+			databaseHelper = null;
+		}
+	}
+	
+	private DatabaseHelper getHelper(){
+		if (databaseHelper == null){
+			databaseHelper = DatabaseHelper.getHelper(this);
+		}
+		return databaseHelper;
+	}
 
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

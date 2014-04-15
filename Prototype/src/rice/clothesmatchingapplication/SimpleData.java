@@ -9,19 +9,14 @@ int id;
 String fileName;
 @DatabaseField
 String type;
-@DatabaseField
-String color;
-@DatabaseField
-String explain;
 
 SimpleData() {
 		// needed by ormlite
 }
 
-public SimpleData(String fileName, String type, String color) {
+public SimpleData(String fileName, String type) {
 	this.fileName = fileName;
 	this.type = type;
-	this.color = color;
 		
 	}
 
@@ -30,7 +25,6 @@ public String toString(){
 	sb.append("id=").append(id);
 	sb.append(", ").append("fileName=").append(fileName);
 	sb.append(", ").append("type=").append(type);
-	sb.append(", ").append("color=").append(color);
 	return sb.toString();
 	}
 }

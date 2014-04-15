@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="154dp"
-        android:onClick="moveToExpertCategories"
+        android:onClick="moveToCamera"
         android:text="@string/AddNewClothes" />
 
 </RelativeLayout>
