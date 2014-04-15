@@ -14,7 +14,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 public class NewEntryHome extends Activity {
 
@@ -30,7 +32,12 @@ public class NewEntryHome extends Activity {
 			        loadIntoImageview(imageLocation);
 			} 
 		**/	
-			//loadItemIntoDatabase(name, type);
+			Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
+			String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Skirts", "Shoes"};
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+			dropdown.setAdapter(adapter);
+		
+			//loadItemIntoDatabase(filePath, type);
 	
 	}
 	

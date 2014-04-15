@@ -113,7 +113,7 @@ public static OldEntryHome instance;
 			//maybe the createifnotexist function would have been easier but oh well
 		if (nameStatus==false)
 		{
-		SimpleData simple = new SimpleData("Pants" ,"Blue");
+		SimpleData simple = new SimpleData("Pants" ,"Blue Jeans");
 		simpleDao.create(simple);
 		}
 		
