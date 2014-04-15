@@ -19,7 +19,8 @@ public class ImageAdapter extends BaseAdapter{
 
 	private Context mContext;
 	public Bitmap[] bits;
-
+	public String[] filePaths;
+	
 	public static int calculateInSampleSize(BitmapFactory.Options options, int reqHeight, int reqWidth){
 
 		final int height = options.outHeight;
@@ -45,10 +46,12 @@ public class ImageAdapter extends BaseAdapter{
 		File[] names = directory.listFiles();
 		Log.d("Files", "Size: "+ names.length);
 		bits = new Bitmap[names.length];
-
+		filePaths = new String[names.length];
+		
 	    mContext = c;
 	    
 	    for (int i=0; i< names.length; i++){
+	    	filePaths[i] = names[i].getAbsolutePath();
 	    	Bitmap bitmap = decodeBitmap(names[i].getAbsolutePath(),250,250);
 	    	int pictureRotation = getPictureRotation(names[i].getAbsolutePath());
 	    	Matrix matrix = new Matrix();
@@ -56,6 +59,10 @@ public class ImageAdapter extends BaseAdapter{
 	    	bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 	    	bits[i]=bitmap;
         }
+	}
+	
+	public String[] getFilePaths(){
+		return filePaths;
 	}
 	
 	private static int exifToDegrees(int exifOrientation) {        
