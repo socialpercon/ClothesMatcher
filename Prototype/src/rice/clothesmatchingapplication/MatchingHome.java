@@ -3,7 +3,9 @@ package rice.clothesmatchingapplication;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 
 public class MatchingHome extends Activity {
 
@@ -28,6 +30,11 @@ public class MatchingHome extends Activity {
 		
 	}
 	
-	
+	public void moveToNewEntryHome(View view){
+		Intent move = new Intent(this, NewEntryHome.class);
+		move.putExtra(EXTRA_MESSAGE, filePath);
+		Log.d("FilePath", filePath);
+		startActivity(move);
+	}
 	
 }
