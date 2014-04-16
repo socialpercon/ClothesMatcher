@@ -1,11 +1,14 @@
 package rice.clothesmatchingapplication;
 
+import java.io.IOException;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.GridView;
 
 public class MatchingHome extends Activity {
 
@@ -20,7 +23,13 @@ public class MatchingHome extends Activity {
 		Bundle bundle = intent.getExtras();
 		filePath = bundle.getString(EXTRA_MESSAGE);
 		
-	}
+		GridView gridView = (GridView)findViewById(R.id.gridView1);
+		 try {
+				gridView.setAdapter(new ImageAdapter(this));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		 }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

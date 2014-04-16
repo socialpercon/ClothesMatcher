@@ -38,7 +38,7 @@ public class NewEntryHome extends Activity {
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
 			dropdown.setAdapter(adapter);
 			
-			Intent moveFrom =  getIntent();
+/**			Intent moveFrom =  getIntent();
 			Bundle bundle  = moveFrom.getExtras();
 			filePath = bundle.getString("EXTRA_MESSAGE");
 			
@@ -47,7 +47,7 @@ public class NewEntryHome extends Activity {
 		        loadIntoImageview(filePath);
 		}
 			
-			
+**/		
 	}
 	
 	public void moveToMatchingHome(View view){

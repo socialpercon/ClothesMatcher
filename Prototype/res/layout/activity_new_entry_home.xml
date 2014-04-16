@@ -22,6 +22,7 @@
         android:layout_alignLeft="@+id/button2"
         android:layout_alignParentTop="true"
         android:layout_marginTop="122dp"
+        android:onClick="moveToMatchingHome"
         android:text="@string/AddMatches" />
 
     <Button
