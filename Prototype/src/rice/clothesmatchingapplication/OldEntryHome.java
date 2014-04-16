@@ -49,89 +49,8 @@ public static OldEntryHome instance;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		doSampleDatabaseStuff();
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.old_entry_home, menu);
-		return true;
 	}
 
-	@Override
-	protected void onDestroy(){
-		super.onDestroy();
-		if(databaseHelper!=null){
-			databaseHelper.close();
-			databaseHelper = null;
-		}
-	}
-	
-	private DatabaseHelper getHelper(){
-		if (databaseHelper == null){
-			databaseHelper = DatabaseHelper.getHelper(this);
-		}
-		return databaseHelper;
-	}
-
-	private void doSampleDatabaseStuff() {
-		try {
-			// our string builder for building the content-view
-			StringBuilder sb = new StringBuilder();
-			doSimpleDatabaseStuff(sb);
-			
-			Log.i(LOG_TAG, "Done with page at " + System.currentTimeMillis());
-		} catch (SQLException e) {
-			Log.e(LOG_TAG, "Database exception", e);
-			return;
-		}
-	}
-	
-	private StringBuilder doSimpleDatabaseStuff(StringBuilder sb) throws SQLException, java.sql.SQLException {
-		// get our dao
-		Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
-		// query for all of the data objects in the database
-		List<SimpleData> list = simpleDao.queryForAll();
-		
-		String[] fileNames = imageAdapter.getFilePaths();
-		String name = "";
-		Boolean nameStatus = false;
-		for (String s: fileNames)
-		{
-			name = s;
-			
-			for (SimpleData data: list){
-				SimpleData Entry = data;
-				
-				if(Entry.fileName.equals(name)){
-					nameStatus = true;
-				}
-			
-			}
-			//maybe the createifnotexist function would have been easier but oh well
-		if (nameStatus==false)
-		{
-		SimpleData simple = new SimpleData("Pants" ,"Blue Jeans");
-		simpleDao.create(simple);
-		}
-		
-		nameStatus =false;
-		}
-//		for deleting database items, use deleteById!		
-//		for (SimpleData data: list){
-//			simpleDao.deleteById(data.id);
-//		}
-		
-		try {
-				Thread.sleep(5);
-			} catch (InterruptedException e) {
-				// ignore
-		}
-		return sb;
-	}
-	
 }
 
 

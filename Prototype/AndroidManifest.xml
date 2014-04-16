@@ -73,6 +73,10 @@
             android:name="rice.clothesmatchingapplication.OldEntryHome"
             android:label="@string/title_activity_old_entry_home" >
         </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.MatchingHome"
+            android:label="@string/title_activity_matching_home" >
+        </activity>
     </application>
 
 </manifest>

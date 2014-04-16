@@ -30,5 +30,7 @@
     <string name="title_activity_old_entry_home">OldEntryHome</string>
     <string name="finishedEditing">Finished Editing</string>
     <string name="ClothingName">Clothing Name:</string>
+    <string name="Done">Done</string>
+    <string name="title_activity_matching_home">MatchingHome</string>
 
 </resources>

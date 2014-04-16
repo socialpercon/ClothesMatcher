@@ -14,7 +14,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -22,29 +24,44 @@ public class NewEntryHome extends Activity {
 
 	private final String LOG_TAG = getClass().getSimpleName();
 	private DatabaseHelper databaseHelper = null;
+	public static final String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	public String filePath;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_entry_home);
-	/**		    File imageFile = new File(imageLocation);
-			    if (imageFile.exists()) {
-			        loadIntoImageview(imageLocation);
-			} 
-		**/	
+			 
+	
 			Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
 			String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Skirts", "Shoes"};
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
 			dropdown.setAdapter(adapter);
-		
-			//loadItemIntoDatabase(filePath, type);
+			
+			Intent moveFrom =  getIntent();
+			Bundle bundle  = moveFrom.getExtras();
+			filePath = bundle.getString("EXTRA_MESSAGE");
+			
+		    File imageFile = new File(filePath);
+		    if (imageFile.exists()) {
+		        loadIntoImageview(filePath);
+		}
+			
+			
+	}
 	
+	public void moveToMatchingHome(View view){
+		Intent move = new Intent(this, MatchingHome.class);
+		move.putExtra(EXTRA_MESSAGE, filePath);
+		startActivity(move);
 	}
 	
 	public void loadItemIntoDatabase(String ClothesName, String ClothesType){
 		try {
 			Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
-			SimpleData simple = new SimpleData(ClothesName, ClothesType);
+			//inserting random matches for now
+			String[] matches = {"Blue Jeans", "Black Sweater", "Orange Tutu"};
+			SimpleData simple = new SimpleData(ClothesName, ClothesType, matches);
 			simpleDao.createIfNotExists(simple);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,6 +90,14 @@ public class NewEntryHome extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.new_entry_home, menu);
 		return true;
+	}
+	
+	public void moveToExpertHome(View view){
+		Intent move = new Intent(this, ExpertHome1.class);
+		Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
+		String type = dropdown.toString();
+		loadItemIntoDatabase(filePath, type);
+		startActivity(move);
 	}
 	
 	public void loadIntoImageview(String path){
