@@ -68,6 +68,8 @@ public class ExpertHome1 extends Activity {
 		if (requestCode==CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
 			if(resultCode==RESULT_OK){
 				Intent move = new Intent(this, NewEntryHome.class);
+				//insert extra message
+				//move.putExtra(EXTRA_MESSAGE, filePath)
 				startActivity(move);
 			}
 			else if (resultCode == RESULT_CANCELED){

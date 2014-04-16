@@ -39,6 +39,39 @@ public class MatchingHome extends Activity {
 		
 	}
 	
+	public void moveToLongSleeveShirtsHome(View view){
+		Intent move = new Intent(this, LongSleeveShirtsMatchHome.class);
+		startActivity(move);
+		
+	}
+
+	public void moveToShortSleeveShirtsHome(View view){
+		Intent move = new Intent(this, ShortSleeveShirtsMatchHome.class);
+		startActivity(move);
+		
+	}
+	
+
+	public void moveToPantsHome(View view){
+		Intent move = new Intent(this, PantsMatchHome.class);
+		startActivity(move);
+		
+	}
+	
+
+	public void moveToSkirtsHome(View view){
+		Intent move = new Intent(this, SkirtsMatchHome.class);
+		startActivity(move);
+		
+	}
+	
+
+	public void moveToShoesHome(View view){
+		Intent move = new Intent(this, ShoesMatchHome.class);
+		startActivity(move);
+		
+	}
+	
 	public void moveToNewEntryHome(View view){
 		Intent move = new Intent(this, NewEntryHome.class);
 		move.putExtra(EXTRA_MESSAGE, filePath);

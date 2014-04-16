@@ -77,6 +77,26 @@
             android:name="rice.clothesmatchingapplication.MatchingHome"
             android:label="@string/title_activity_matching_home" >
         </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.ShoesMatchHome"
+            android:label="@string/title_activity_shoes_match_home" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.PantsMatchHome"
+            android:label="@string/title_activity_pants_match_home" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.ShortSleeveShirtsMatchHome"
+            android:label="@string/title_activity_short_sleeve_shirts_match_home" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.SkirtsMatchHome"
+            android:label="@string/title_activity_skirts_match_home" >
+        </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.LongSleeveShirtsMatchHome"
+            android:label="@string/title_activity_long_sleeve_shirts_match_home" >
+        </activity>
     </application>
 
 </manifest>

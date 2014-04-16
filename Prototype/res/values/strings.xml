@@ -32,5 +32,10 @@
     <string name="ClothingName">Clothing Name:</string>
     <string name="Done">Done</string>
     <string name="title_activity_matching_home">MatchingHome</string>
+    <string name="title_activity_shoes_match_home">ShoesMatchHome</string>
+    <string name="title_activity_pants_match_home">PantsMatchHome</string>
+    <string name="title_activity_short_sleeve_shirts_match_home">ShortSleeveShirtsMatchHome</string>
+    <string name="title_activity_skirts_match_home">SkirtsMatchHome</string>
+    <string name="title_activity_long_sleeve_shirts_match_home">LongSleeveShirtsMatchHome</string>
 
 </resources>
