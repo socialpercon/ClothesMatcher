@@ -22,15 +22,8 @@ public class MatchingHome extends Activity {
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 		filePath = bundle.getString(EXTRA_MESSAGE);
+	}
 		
-		GridView gridView = (GridView)findViewById(R.id.gridView1);
-		 try {
-				gridView.setAdapter(new ImageAdapter(this));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		 }
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

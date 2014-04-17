@@ -27,13 +27,17 @@ import android.widget.ImageView;
 public class LongSleeveShirtsHome extends Activity {
 
 	private DatabaseHelper databaseHelper = null;
-	List<SimpleData> dataList = checkDatabaseType();
-	ArrayList<String> filePathList = new ArrayList<String>(dataList.size());
+	List<SimpleData> dataList;
+	ArrayList<String> filePathList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_long_sleeve_shirts_home);
+		
+		dataList = checkDatabaseType();
+		filePathList = new ArrayList<String>(dataList.size());
+		
 		
 		for (SimpleData data: dataList){
 			String filePath = data.fileName;
@@ -78,7 +82,7 @@ public List<SimpleData> checkDatabaseType(){
 	try {
 		Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
 		QueryBuilder<SimpleData,Integer> queryBuilder = simpleDao.queryBuilder();
-		queryBuilder.where().eq(SimpleData.type, "LongSleeveShirts");
+		queryBuilder.where().eq("type", "Long Sleeve Shirts");
 		PreparedQuery<SimpleData> preparedQuery = queryBuilder.prepare();
 		List<SimpleData> dataList = simpleDao.query(preparedQuery);
 		return dataList;

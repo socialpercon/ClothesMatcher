@@ -1,6 +1,7 @@
 package rice.clothesmatchingapplication;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -46,21 +48,15 @@ public class ExpertHome1 extends Activity {
 		imagesFolder.mkdirs();
 	    File image = new File(imagesFolder, "IMG_" + getDate() + ".jpg");
 	    Uri uriSavedImage = Uri.fromFile(image);
-	    String filePath = image.getAbsolutePath();
 	    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 	    startActivityForResult(cameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 		   
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	public String getDate(){
-		int second = Calendar.SECOND; 
-		int minute = Calendar.MINUTE;
-		int hour = Calendar.HOUR_OF_DAY; 
-		int month = Calendar.MONTH; 
-		int day = Calendar.DAY_OF_MONTH;
-		int year = Calendar.YEAR;
-		String dateString = ""+year+month+day+hour+minute+second;
-		return dateString;
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+		return timeStamp;
 	}
 	
 	@Override
@@ -68,8 +64,6 @@ public class ExpertHome1 extends Activity {
 		if (requestCode==CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
 			if(resultCode==RESULT_OK){
 				Intent move = new Intent(this, NewEntryHome.class);
-				//insert extra message
-				//move.putExtra(EXTRA_MESSAGE, filePath)
 				startActivity(move);
 			}
 			else if (resultCode == RESULT_CANCELED){

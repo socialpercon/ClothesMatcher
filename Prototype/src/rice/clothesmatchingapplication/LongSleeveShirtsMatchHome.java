@@ -80,7 +80,7 @@ public class LongSleeveShirtsMatchHome extends Activity {
 		try {
 			Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
 			QueryBuilder<SimpleData,Integer> queryBuilder = simpleDao.queryBuilder();
-			queryBuilder.where().eq(SimpleData.type, "LongSleeveShirts");
+			queryBuilder.where().eq("type", "LongSleeveShirts");
 			PreparedQuery<SimpleData> preparedQuery = queryBuilder.prepare();
 			List<SimpleData> dataList = simpleDao.query(preparedQuery);
 			return dataList;

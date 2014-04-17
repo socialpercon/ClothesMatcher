@@ -31,7 +31,30 @@ public class NewEntryHome extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_entry_home);
-			 
+		String[] projection = new String[]{
+			    MediaStore.Images.ImageColumns._ID,
+			    MediaStore.Images.ImageColumns.DATA,
+			    MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
+			    MediaStore.Images.ImageColumns.DATE_TAKEN,
+			    MediaStore.Images.ImageColumns.MIME_TYPE
+			    };
+			final Cursor cursor = getContentResolver()
+			        .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, 
+			               null, MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC");
+
+			// Put it in the image view
+			if (cursor.moveToFirst()) {
+			    final ImageView imageView = (ImageView) findViewById(R.id.imageViewMain);
+			    filePath = cursor.getString(1);
+			    File imageFile = new File(filePath);
+			    if (imageFile.exists()) {   // TODO: is there a better way to do this?
+			        Bitmap bm = decodeBitmap(filePath, 250, 250);
+			        imageView.setImageBitmap(bm);         
+			    }
+			    
+			    
+			} 
+		
 	
 			Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
 			String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Skirts", "Shoes"};
@@ -60,9 +83,9 @@ public class NewEntryHome extends Activity {
 		try {
 			Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
 			//inserting random matches for now
-			String[] matches = {"Blue Jeans", "Black Sweater", "Orange Tutu"};
-			SimpleData simple = new SimpleData(ClothesName, ClothesType, matches);
-			simpleDao.createIfNotExists(simple);
+			//String[] matches = {"Blue Jeans", "Black Sweater", "Orange Tutu"};
+			SimpleData simple = new SimpleData(ClothesName, ClothesType);//, matches);
+			simpleDao.create(simple);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -95,7 +118,7 @@ public class NewEntryHome extends Activity {
 	public void moveToExpertHome(View view){
 		Intent move = new Intent(this, ExpertHome1.class);
 		Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
-		String type = dropdown.toString();
+		String type = dropdown.getSelectedItem().toString();
 		loadItemIntoDatabase(filePath, type);
 		startActivity(move);
 	}
