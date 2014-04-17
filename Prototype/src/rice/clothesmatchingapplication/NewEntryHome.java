@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.DeleteBuilder;
 
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -96,6 +97,11 @@ public class NewEntryHome extends Activity {
 		}
 		
 	}
+	//Deleting Matches Code
+	//DeleteBuilder<SimpleData, Integer> deleteBuilder = simpleDao.deleteBuilder();
+	//deleteBuilder.where().eq("type", "Long Sleeve Shirts");
+	//deleteBuilder.delete();
+	
 	
 	protected void onDestroy(){
 		super.onDestroy();
