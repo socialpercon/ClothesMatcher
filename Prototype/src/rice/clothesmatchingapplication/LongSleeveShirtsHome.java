@@ -16,19 +16,24 @@ import android.media.ExifInterface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class LongSleeveShirtsHome extends Activity {
 
 	private DatabaseHelper databaseHelper = null;
 	List<SimpleData> dataList;
 	ArrayList<String> filePathList;
+	public Bitmap bitmap;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class LongSleeveShirtsHome extends Activity {
 		
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
+		
 		
 		
 		for (SimpleData data: dataList){
@@ -53,6 +59,22 @@ public class LongSleeveShirtsHome extends Activity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		gridView.setOnItemClickListener (new OnItemClickListener(){
+	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	    v.buildDrawingCache();
+	    bitmap = v.getDrawingCache();
+	    moveToLongSleeveHome(v);
+	    
+	    }
+	    }
+	    		 );
+	}
+	
+	public void moveToLongSleeveHome(View view) {
+		Intent move = new Intent(this, LongSleeveHome.class);
+		move.putExtra("BitmapImage", bitmap);
+		startActivity(move);
 	}
 
 	@Override
