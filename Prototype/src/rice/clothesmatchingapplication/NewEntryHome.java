@@ -2,6 +2,7 @@ package rice.clothesmatchingapplication;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 
@@ -71,6 +72,8 @@ public class NewEntryHome extends Activity {
 		}
 			
 **/		
+			
+			
 	}
 	
 	public void moveToMatchingHome(View view){
@@ -82,10 +85,12 @@ public class NewEntryHome extends Activity {
 	public void loadItemIntoDatabase(String ClothesName, String ClothesType){
 		try {
 			Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
+			
 			//inserting random matches for now
 			//String[] matches = {"Blue Jeans", "Black Sweater", "Orange Tutu"};
 			SimpleData simple = new SimpleData(ClothesName, ClothesType);//, matches);
 			simpleDao.create(simple);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

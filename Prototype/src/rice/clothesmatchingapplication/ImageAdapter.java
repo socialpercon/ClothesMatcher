@@ -52,6 +52,7 @@ public class ImageAdapter extends BaseAdapter{
 	    
 	    for (int i=0; i< names.length; i++){
 	    	filePaths[i] = names[i].getAbsolutePath();
+	    	Log.d("FilePath", names[i].getAbsolutePath());
 	    	Bitmap bitmap = decodeBitmap(names[i].getAbsolutePath(),250,250);
 	    	int pictureRotation = getPictureRotation(names[i].getAbsolutePath());
 	    	Matrix matrix = new Matrix();

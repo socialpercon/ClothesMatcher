@@ -33,7 +33,8 @@ public class LongSleeveShirtsHome extends Activity {
 	List<SimpleData> dataList;
 	ArrayList<String> filePathList;
 	public Bitmap bitmap;
-
+	private Context mContext;
+	public Bitmap[] bits;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +53,11 @@ public class LongSleeveShirtsHome extends Activity {
 		}
 		
 		
+		
 		GridView gridView = (GridView)findViewById(R.id.gridView1);
 		
 		try {
-			gridView.setAdapter(new ImageAdapter(this));
+			gridView.setAdapter(new ImageAdapterPartial(this));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -116,10 +118,7 @@ public List<SimpleData> checkDatabaseType(){
 	
 }
 
-private class ImageAdapterPartial extends BaseAdapter{
-
-	private Context mContext;
-	public Bitmap[] bits;
+private class ImageAdapterPartial extends BaseAdapter{	
 	
 	public int calculateInSampleSize(BitmapFactory.Options options, int reqHeight, int reqWidth){
 
@@ -143,9 +142,14 @@ private class ImageAdapterPartial extends BaseAdapter{
 	public ImageAdapterPartial(Context c) throws IOException{
 		
 		mContext = c;
+		bits = new Bitmap[filePathList.size()];
 		
 	    for (int i=0; i< filePathList.size(); i++){    	
+	    	Log.d("FilePath", filePathList.get(i));
 	    	Bitmap bitmap = decodeBitmap(filePathList.get(i),250,250);
+	    	if (bitmap == null){
+	    		Log.d("ERROR", "BITMAP IS NULL");
+	    	}
 	    	int pictureRotation = getPictureRotation(filePathList.get(i));
 	    	Matrix matrix = new Matrix();
 	    	matrix.postRotate(pictureRotation);
@@ -170,7 +174,6 @@ private class ImageAdapterPartial extends BaseAdapter{
 	}
 	
 	public Bitmap decodeBitmap(String names, int reqWidth, int reqHeight) {
-		
 		
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
