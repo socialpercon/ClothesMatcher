@@ -66,10 +66,11 @@ public class NewEntryHome extends Activity {
 	public void loadItemIntoDatabase(String ClothesName, String ClothesType){
 		try {
 			Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
-			
+			Dao<MatchesData, Integer> matchDao = getHelper().getMatchesDataDao();
 			//inserting random matches for now
 			//String[] matches = {"Blue Jeans", "Black Sweater", "Orange Tutu"};
-			SimpleData simple = new SimpleData(ClothesName, ClothesType);//, matches);
+			SimpleData simple = new SimpleData(ClothesName, ClothesType);
+			//MatchesData matches = new MatchesData(ClothesName, null, null);
 			simpleDao.create(simple);
 			
 		} catch (SQLException e) {

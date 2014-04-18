@@ -17,6 +17,7 @@ import com.j256.ormlite.table.TableUtils;
 		private static final String DATABASE_NAME = "ClothesMatchingDb.db";
 		private static final int DATABASE_VERSION = 1;
 		private Dao<SimpleData, Integer> simpleDao = null;
+		private Dao<MatchesData, Integer> matchDao = null;
 		public static DatabaseHelper helper = null;
 		private static final AtomicInteger usageCounter = new AtomicInteger(0);
 		
@@ -90,17 +91,18 @@ import com.j256.ormlite.table.TableUtils;
 			return simpleDao;
 		}
 		
-		public Dao<SimpleData, Integer> getSimpleDataDaoM() throws SQLException {
-			if (simpleDao == null) {
-				simpleDao = getDao(MatchesData.class);
+		public Dao<MatchesData, Integer> getMatchesDataDao() throws SQLException {
+			if (matchDao == null) {
+				matchDao = getDao(MatchesData.class);
 			}
-			return simpleDao;
+			return matchDao;
 		}
 		
 		public void close() {
 			if (usageCounter.decrementAndGet() == 0) {
 				super.close();
 				simpleDao = null;
+				matchDao = null;
 				helper = null;
 			}
 		}
