@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,51 +29,30 @@ public class NewEntryHome extends Activity {
 	private DatabaseHelper databaseHelper = null;
 	public static final String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	public String filePath;
+	public SharedPreferences filepath; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_entry_home);
-		String[] projection = new String[]{
-			    MediaStore.Images.ImageColumns._ID,
-			    MediaStore.Images.ImageColumns.DATA,
-			    MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
-			    MediaStore.Images.ImageColumns.DATE_TAKEN,
-			    MediaStore.Images.ImageColumns.MIME_TYPE
-			    };
-			final Cursor cursor = getContentResolver()
-			        .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, 
-			               null, MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC");
-
-			// Put it in the image view
-			if (cursor.moveToFirst()) {
-			    final ImageView imageView = (ImageView) findViewById(R.id.imageViewMain);
-			    filePath = cursor.getString(1);
-			    File imageFile = new File(filePath);
-			    if (imageFile.exists()) {   // TODO: is there a better way to do this?
-			        Bitmap bm = decodeBitmap(filePath, 250, 250);
-			        imageView.setImageBitmap(bm);         
-			    }
-			    
-			    
-			} 
-		
+		filepath = getSharedPreferences("filepath", MODE_PRIVATE);
+			
 	
 			Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
 			String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Skirts", "Shoes"};
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
 			dropdown.setAdapter(adapter);
 			
-/**			Intent moveFrom =  getIntent();
+			Intent moveFrom =  getIntent();
 			Bundle bundle  = moveFrom.getExtras();
-			filePath = bundle.getString("EXTRA_MESSAGE");
+			filePath = filepath.getString("file", "");
 			
 		    File imageFile = new File(filePath);
 		    if (imageFile.exists()) {
 		        loadIntoImageview(filePath);
 		}
 			
-**/		
+		
 			
 			
 	}

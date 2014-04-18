@@ -11,7 +11,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
@@ -23,11 +26,14 @@ public class ExpertHome1 extends Activity {
 	public final static String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";	
 	public final static String FILE_PATH = "FilePath.MESSAGE";
 	public static final int REQUEST_FILE_PATH = 100;
+	
+	public SharedPreferences filepath; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_expert_home1);
+		filepath = getSharedPreferences("filepath", MODE_PRIVATE);
 	}
 
 	@Override
@@ -41,14 +47,25 @@ public class ExpertHome1 extends Activity {
 		Intent move = new Intent(this, EditHome1.class);
 		startActivity(move);
 	}
-
+	
+	
 	public void moveToCamera(View view) {
 		Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		File imagesFolder = new File(Environment.getExternalStorageDirectory(), "ClothesMatchingApplication");
 		imagesFolder.mkdirs();
 	    File image = new File(imagesFolder, "IMG_" + getDate() + ".jpg");
+	    String filePath = image.getAbsolutePath();
+	    
+		
+	    Editor edit = filepath.edit();
+	    edit.clear();
+	    edit.putString("file", filePath);
+	    edit.commit();
+	    
+	    
 	    Uri uriSavedImage = Uri.fromFile(image);
 	    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+	   
 	    startActivityForResult(cameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 		   
 	}
@@ -64,6 +81,7 @@ public class ExpertHome1 extends Activity {
 		if (requestCode==CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
 			if(resultCode==RESULT_OK){
 				Intent move = new Intent(this, NewEntryHome.class);
+				
 				startActivity(move);
 			}
 			else if (resultCode == RESULT_CANCELED){
