@@ -37,7 +37,18 @@ import com.j256.ormlite.table.TableUtils;
 			try{
 				Log.i(DatabaseHelper.class.getName(), "onCreate");
 				TableUtils.createTable(connectionSource, SimpleData.class);
-				//TableUtils.createTable(connectionSource, MatchesData.class);
+				TableUtils.createTable(connectionSource, MatchesData.class);
+			} 
+			catch (SQLException e) {
+				Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
+				throw new RuntimeException(e);
+		}
+		}
+		
+		public void onCreateM(SQLiteDatabase db, ConnectionSource connectionSource) {
+			try{
+				Log.i(DatabaseHelper.class.getName(), "onCreate");
+				TableUtils.createTable(connectionSource, MatchesData.class);
 			} 
 			catch (SQLException e) {
 				Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
@@ -59,9 +70,29 @@ import com.j256.ormlite.table.TableUtils;
 			
 		}
 		
+	
+		public void onUpgradeM(SQLiteDatabase db, ConnectionSource connectionSource, int oldVer,
+				int newVer) {
+			try{
+				TableUtils.dropTable(connectionSource, MatchesData.class, true);
+				onCreate(db, connectionSource);
+			}
+			catch(SQLException e){
+			throw new RuntimeException(e);
+			}
+			
+		}
+		
 		public Dao<SimpleData, Integer> getSimpleDataDao() throws SQLException {
 			if (simpleDao == null) {
 				simpleDao = getDao(SimpleData.class);
+			}
+			return simpleDao;
+		}
+		
+		public Dao<SimpleData, Integer> getSimpleDataDaoM() throws SQLException {
+			if (simpleDao == null) {
+				simpleDao = getDao(MatchesData.class);
 			}
 			return simpleDao;
 		}
