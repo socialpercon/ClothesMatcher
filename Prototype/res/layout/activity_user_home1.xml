@@ -24,7 +24,7 @@
         android:layout_alignRight="@+id/ImageButton1"
         android:layout_below="@+id/ImageButton1"
         android:onClick="moveToSkirtsHome"
-        android:text="@string/SkirtsCategory" 
+		android:background="@drawable/emme_shorts"
         />
 
     <Button
@@ -46,13 +46,6 @@
         android:onClick="moveToLSShirtsHome"
         android:background="@drawable/emme_longsleeves"/>
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_below="@+id/buttonDone"
-        android:layout_toLeftOf="@+id/button4"
-        android:onClick="moveToShoesHome"
-        android:text="@string/ShoesCategory" />
+   
 
 </RelativeLayout>
