@@ -40,7 +40,7 @@ public class ImageAdapter extends BaseAdapter{
 	}
 	
 	
-	public ImageAdapter(Context c) throws IOException{
+	public ImageAdapter(Context c){
 		File sdCard = Environment.getExternalStorageDirectory();
 		File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
 		File[] names = directory.listFiles();
@@ -51,14 +51,19 @@ public class ImageAdapter extends BaseAdapter{
 	    mContext = c;
 	    
 	    for (int i=0; i< names.length; i++){
+	    	try {
 	    	filePaths[i] = names[i].getAbsolutePath();
 	    	Log.d("FilePath", names[i].getAbsolutePath());
 	    	Bitmap bitmap = decodeBitmap(names[i].getAbsolutePath(),250,250);
-	    	int pictureRotation = getPictureRotation(names[i].getAbsolutePath());
+	    	int pictureRotation;
+				pictureRotation = getPictureRotation(names[i].getAbsolutePath());
 	    	Matrix matrix = new Matrix();
 	    	matrix.postRotate(pictureRotation);
 	    	bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 	    	bits[i]=bitmap;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
         }
 	}
 	

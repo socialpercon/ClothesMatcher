@@ -54,14 +54,9 @@ public class ShortSleeveShirtsHome extends Activity {
 		
 		GridView gridView = (GridView)findViewById(R.id.gridView1);
 		
-		try {
-			gridView.setAdapter(new ImageAdapterPartial(this));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		gridView.setAdapter(new ImageAdapterPartial(this));
 		
-		
-}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,22 +118,27 @@ private class ImageAdapterPartial extends BaseAdapter{
 	}
 	
 	
-	public ImageAdapterPartial(Context c) throws IOException{
+	public ImageAdapterPartial(Context c){
 		
 		mContext = c;
 		bits = new Bitmap[filePathList.size()];
 		
-	    for (int i=0; i< filePathList.size(); i++){    	
+	    for (int i=0; i< filePathList.size(); i++){  
+	    	try {
 	    	Log.d("FilePath", filePathList.get(i));
 	    	Bitmap bitmap = decodeBitmap(filePathList.get(i),250,250);
 	    	if (bitmap == null){
 	    		Log.d("ERROR", "BITMAP IS NULL");
 	    	}
-	    	int pictureRotation = getPictureRotation(filePathList.get(i));
+	    	int pictureRotation;
+			pictureRotation = getPictureRotation(filePathList.get(i));
 	    	Matrix matrix = new Matrix();
 	    	matrix.postRotate(pictureRotation);
 	    	bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 	    	bits[i]=bitmap;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
         }
 	}
 	
