@@ -9,22 +9,23 @@
     tools:context=".UserHome1" >
 
     <Button
-        android:id="@+id/buttonDoneMatchEditing"
+        android:id="@+id/ImageButton1"
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:onClick="moveToSSShirtsHome"
-        android:text="@string/ShortSleeveShirtsCategory" />
+        android:background="@drawable/emme_shortsleeves"/>"
 
     <Button
         android:id="@+id/buttonDone"
         android:layout_width="150dp"
         android:layout_height="75dp"
-        android:layout_alignRight="@+id/buttonDoneMatchEditing"
-        android:layout_below="@+id/buttonDoneMatchEditing"
+        android:layout_alignRight="@+id/ImageButton1"
+        android:layout_below="@+id/ImageButton1"
         android:onClick="moveToSkirtsHome"
-        android:text="@string/SkirtsCategory" />
+        android:text="@string/SkirtsCategory" 
+        />
 
     <Button
         android:id="@+id/button4"
@@ -34,16 +35,16 @@
         android:layout_alignBottom="@+id/buttonDone"
         android:layout_alignLeft="@+id/button2"
         android:onClick="moveToPantsHome"
-        android:text="@string/PantsCategory" />
+		android:background="@drawable/emme_pants" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="150dp"
         android:layout_height="75dp"
-        android:layout_alignTop="@+id/buttonDoneMatchEditing"
-        android:layout_toRightOf="@+id/buttonDoneMatchEditing"
+        android:layout_alignTop="@+id/ImageButton1"
+        android:layout_toRightOf="@+id/ImageButton1"
         android:onClick="moveToLSShirtsHome"
-        android:text="@string/LongSleeveShirtsCategory" />
+        android:background="@drawable/emme_longsleeves"/>
 
     <Button
         android:id="@+id/button5"
