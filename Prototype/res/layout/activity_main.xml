@@ -15,16 +15,16 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="moveToUserHome"
-        android:text="@string/MoveToUserHome" />
+        android:background="@drawable/emme_closet" />
 
     <Button
         android:id="@+id/buttonToExpertHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="moveToExpertHome"
-        android:text="@string/ToExpertHome" />
+        android:background="@drawable/emme_edit" />
 
     <TextView
         android:id="@+id/textView1"
