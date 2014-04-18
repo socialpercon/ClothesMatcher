@@ -55,11 +55,8 @@ public class LongSleeveHome extends Activity {
 		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
 		imageView.setImageBitmap(bitmap);
 		
-		try {
-			imageAdapter = new ImageAdapter(instance);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		imageAdapter = new ImageAdapter(instance);
+		
 		
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());

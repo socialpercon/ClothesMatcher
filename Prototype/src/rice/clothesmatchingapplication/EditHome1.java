@@ -22,11 +22,8 @@ public class EditHome1 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_home1);
 		GridView gridView = (GridView) findViewById(R.id.EditGridView);
-	    try {
-			gridView.setAdapter(new ImageAdapter(this));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	    
+		gridView.setAdapter(new ImageAdapter(this));
 	     
 	    gridView.setOnItemClickListener (new OnItemClickListener(){
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
