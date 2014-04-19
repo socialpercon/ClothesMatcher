@@ -33,6 +33,8 @@ public class ImagesHome extends Activity {
 	private DatabaseHelper databaseHelper = null;
 	public static ImagesHome instance;
 	public ImageAdapter imageAdapter; 
+	public String category;
+	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	public ImagesHome() {
 		instance = this;
 	}
@@ -51,12 +53,13 @@ public class ImagesHome extends Activity {
 		
 		Intent intent = getIntent();
 		Bitmap bitmap = (Bitmap) intent.getParcelableExtra("BitmapImage");
+		Bundle bundle = intent.getExtras();
+		category = bundle.getString(EXTRA_MESSAGE);
 		
 		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
 		imageView.setImageBitmap(bitmap);
 		
-		imageAdapter = new ImageAdapter(instance);
-		
+		imageAdapter = new ImageAdapter(instance);	
 		
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
@@ -163,7 +166,21 @@ public class ImagesHome extends Activity {
 		try {
 			Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
 			QueryBuilder<SimpleData,Integer> queryBuilder = simpleDao.queryBuilder();
+			if (category.equals("Long Sleeve Shirts")){
 			queryBuilder.where().eq("type", "Long Sleeve Shirts");
+			}
+			if (category.equals("Short Sleeve Shirts")){
+				queryBuilder.where().eq("type", "Short Sleeve Shirts");
+			}
+				
+			if (category.equals("Pants")){
+				queryBuilder.where().eq("type", "Pants");
+			}
+				
+			if (category.equals("Shorts")){
+				queryBuilder.where().eq("type", "Shorts");
+			}
+				
 			PreparedQuery<SimpleData> preparedQuery = queryBuilder.prepare();
 			List<SimpleData> dataList = simpleDao.query(preparedQuery);
 			return dataList;
