@@ -27,6 +27,7 @@ public class NewEntryHome extends Activity {
 
 	private final String LOG_TAG = getClass().getSimpleName();
 	private DatabaseHelper databaseHelper = null;
+
 	public static final String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	public String filePath;
 	public SharedPreferences filepath; 
@@ -52,8 +53,6 @@ public class NewEntryHome extends Activity {
 		        loadIntoImageview(filePath);
 		}
 			
-		
-			
 			
 	}
 	
@@ -66,12 +65,12 @@ public class NewEntryHome extends Activity {
 	public void loadItemIntoDatabase(String ClothesName, String ClothesType){
 		try {
 			Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
-			Dao<MatchesData, Integer> matchDao = getHelper().getMatchesDataDao();
-			//inserting random matches for now
-			//String[] matches = {"Blue Jeans", "Black Sweater", "Orange Tutu"};
+//			Dao<MatchesData, Integer> matchDao = getHelper().getMatchesDataDao();
+			
 			SimpleData simple = new SimpleData(ClothesName, ClothesType);
-			//MatchesData matches = new MatchesData(ClothesName, null, null);
+//			MatchesData matches = new MatchesData(ClothesName, null, null);
 			simpleDao.create(simple);
+//			matchDao.create(matches);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -86,7 +85,7 @@ public class NewEntryHome extends Activity {
 	
 	protected void onDestroy(){
 		super.onDestroy();
-		if(databaseHelper!=null){
+		if(databaseHelper==null){
 			databaseHelper.close();
 			databaseHelper = null;
 		}

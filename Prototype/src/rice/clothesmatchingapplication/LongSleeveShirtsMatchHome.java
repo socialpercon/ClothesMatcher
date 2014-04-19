@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -35,12 +36,14 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	public Bitmap bitmap;
 	private Context mContext;
 	public Bitmap[] bits;
+	//public SharedPreferences filepath; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_long_sleeve_shirts_match_home);
-		
+		//filepath = getSharedPreferences("filepath", MODE_PRIVATE);
+		//String filePath = filepath.getString("file", "");
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
 		

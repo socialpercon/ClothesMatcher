@@ -38,7 +38,7 @@ import com.j256.ormlite.table.TableUtils;
 			try{
 				Log.i(DatabaseHelper.class.getName(), "onCreate");
 				TableUtils.createTable(connectionSource, SimpleData.class);
-				TableUtils.createTable(connectionSource, MatchesData.class);
+				//TableUtils.createTable(connectionSource, MatchesData.class);
 			} 
 			catch (SQLException e) {
 				Log.e(DatabaseHelper.class.getName(), "Can't create database", e);

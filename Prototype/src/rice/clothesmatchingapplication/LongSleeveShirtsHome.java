@@ -28,9 +28,9 @@ import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class LongSleeveShirtsHome extends Activity {
-
+	//in individual clothes classes, table creation happens, and loading into listView
 	private DatabaseHelper databaseHelper = null;
-	List<SimpleData> dataList;
+//	List<SimpleData> dataList;
 	ArrayList<String> filePathList;
 	public Bitmap bitmap;
 	private Context mContext;
@@ -41,24 +41,23 @@ public class LongSleeveShirtsHome extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_long_sleeve_shirts_home);
 		
-		dataList = checkDatabaseType();
-		filePathList = new ArrayList<String>(dataList.size());
+//		dataList = checkDatabaseType();
+//		filePathList = new ArrayList<String>(dataList.size());
 		
 		
 		
-		for (SimpleData data: dataList){
-			String filePath = data.fileName;
-			Log.d("filePath", filePath);
-			filePathList.add(filePath);
-		}
-		
+//		for (SimpleData data: dataList){
+//			String filePath = data.fileName;
+//			Log.d("filePath", filePath);
+//			filePathList.add(filePath);
+//		}
 		
 		
 		GridView gridView = (GridView)findViewById(R.id.gridView1);
 		
 
 		gridView.setAdapter(new ImageAdapterPartial(this));
-		
+		//onclick for a picture in gridview
 		gridView.setOnItemClickListener (new OnItemClickListener(){
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	    v.buildDrawingCache();
@@ -75,6 +74,8 @@ public class LongSleeveShirtsHome extends Activity {
 		move.putExtra("BitmapImage", bitmap);
 		startActivity(move);
 	}
+	//instead of bitmap also need filepath name to add to db, need original filepath also in this class 
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,6 +83,20 @@ public class LongSleeveShirtsHome extends Activity {
 		getMenuInflater().inflate(R.menu.long_sleeve_shirts_home, menu);
 		return true;
 	}
+	
+
+	
+public void loadItemIntoDatabase(String previousFile, String newFile){
+	try {
+		Dao<MatchesData, Integer> matchDao = getHelper().getMatchesDataDao();
+		MatchesData matches = new MatchesData(previousFile, newFile);
+		matchDao.create(matches);
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+}	
 
 
 protected void onDestroy(){
@@ -98,7 +113,7 @@ private DatabaseHelper getHelper(){
 	}
 	return databaseHelper;
 }
-
+//queries for certain type of clothes in db
 public List<SimpleData> checkDatabaseType(){
 	try {
 		Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
@@ -115,6 +130,7 @@ public List<SimpleData> checkDatabaseType(){
 	
 }
 
+//upload list view
 private class ImageAdapterPartial extends BaseAdapter{	
 	
 	public int calculateInSampleSize(BitmapFactory.Options options, int reqHeight, int reqWidth){
@@ -166,6 +182,8 @@ public ImageAdapterPartial(Context c){
 	    else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270) {  return 270; }            
 	    return 0;    
 	 }
+	
+	
 	
 	public int getPictureRotation(String path) throws IOException{
 		ExifInterface exif = new ExifInterface(path);
