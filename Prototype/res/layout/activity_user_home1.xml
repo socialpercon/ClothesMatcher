@@ -11,7 +11,7 @@
     <Button
         android:id="@+id/ImageButton1"
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="150dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:onClick="moveToSSShirtsHome"
@@ -20,7 +20,7 @@
     <Button
         android:id="@+id/buttonDone"
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="150dp"
         android:layout_alignRight="@+id/ImageButton1"
         android:layout_below="@+id/ImageButton1"
         android:onClick="moveToSkirtsHome"
@@ -30,7 +30,7 @@
     <Button
         android:id="@+id/button4"
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="150dp"
         android:layout_alignBaseline="@+id/buttonDone"
         android:layout_alignBottom="@+id/buttonDone"
         android:layout_alignLeft="@+id/button2"
@@ -40,7 +40,7 @@
     <Button
         android:id="@+id/button2"
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="150dp"
         android:layout_alignTop="@+id/ImageButton1"
         android:layout_toRightOf="@+id/ImageButton1"
         android:onClick="moveToLSShirtsHome"
