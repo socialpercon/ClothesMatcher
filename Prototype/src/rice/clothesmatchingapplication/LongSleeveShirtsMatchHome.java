@@ -34,6 +34,7 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	private DatabaseHelperM databaseHelperM = null;
 	List<SimpleData> dataList;
 	ArrayList<String> filePathList;
+	ArrayList<Integer> positionList;
 	public Bitmap bitmap;
 	private Context mContext;
 	public Bitmap[] bits;
@@ -65,10 +66,15 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	    v.buildDrawingCache();
 	    bitmap = v.getDrawingCache();
+	    //new addition
+	    String new_filepath = filePathList.get(position);
+	    Log.d("second filepath", new_filepath);
+	
 //	    moveToLongSleeveHome(v);
-	    
 	    	 }
+	    	 
 	    }
+		
 				);
 	}
 
@@ -206,6 +212,8 @@ public ImageAdapterPartial(Context c){
 	public Object getItem(int position){
 	    return bits[position];
 	}
+	
+	
 
 	@Override
 	public long getItemId(int position){
