@@ -70,7 +70,7 @@ public class LongSleeveShirtsHome extends Activity {
 	}
 	
 	public void moveToLongSleeveHome(View view) {
-		Intent move = new Intent(this, LongSleeveHome.class);
+		Intent move = new Intent(this, ImagesHome.class);
 		move.putExtra("BitmapImage", bitmap);
 		startActivity(move);
 	}

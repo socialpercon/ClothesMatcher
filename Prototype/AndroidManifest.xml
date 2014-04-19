@@ -98,7 +98,7 @@
             android:label="@string/title_activity_long_sleeve_shirts_match_home" >
         </activity>
         <activity
-            android:name="rice.clothesmatchingapplication.LongSleeveHome"
+            android:name="rice.clothesmatchingapplication.ImagesHome"
             android:label="@string/title_activity_long_sleeve_home" >
         </activity>
     </application>

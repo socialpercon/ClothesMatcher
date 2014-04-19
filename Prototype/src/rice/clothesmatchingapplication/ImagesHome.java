@@ -28,12 +28,12 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class LongSleeveHome extends Activity {
+public class ImagesHome extends Activity {
 	
 	private DatabaseHelper databaseHelper = null;
-	public static LongSleeveHome instance;
+	public static ImagesHome instance;
 	public ImageAdapter imageAdapter; 
-	public LongSleeveHome() {
+	public ImagesHome() {
 		instance = this;
 	}
 	
