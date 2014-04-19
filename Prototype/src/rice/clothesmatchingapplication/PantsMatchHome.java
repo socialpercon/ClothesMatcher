@@ -33,6 +33,8 @@ public class PantsMatchHome extends Activity {
 	public Bitmap bitmap;
 	private Context mContext;
 	public Bitmap[] bits;
+	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
+	public String filePathOriginal;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,9 @@ public class PantsMatchHome extends Activity {
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
 		
-		
+		Intent intent = getIntent();
+		Bundle bundle = intent.getExtras();
+		filePathOriginal = bundle.getString(EXTRA_MESSAGE2);
 		
 		for (SimpleData data: dataList){
 			String filePath = data.fileName;
