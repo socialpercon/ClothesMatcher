@@ -1,12 +1,14 @@
 package rice.clothesmatchingapplication;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
@@ -15,6 +17,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -115,11 +118,40 @@ public class NewEntryHome extends Activity {
 	}
 	
 	public void loadIntoImageview(String path){
+		try {
 		Log.d("Path", "Path: " + path);
 		Bitmap bitmap = decodeBitmap(path,250,250);
+		
+		int pictureRotation;
+		
+			pictureRotation = getPictureRotation(path);
+		Matrix matrix = new Matrix();
+		matrix.postRotate(pictureRotation);
+		bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+	
 		ImageView imageView = (ImageView) findViewById(R.id.imageViewMain);
 		imageView.setImageBitmap(bitmap);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
+	
+	private static int exifToDegrees(int exifOrientation) {        
+	    if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) { return 90; } 
+	    else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180) {  return 180; } 
+	    else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270) {  return 270; }            
+	    return 0;    
+	 }
+	
+	public int getPictureRotation(String path) throws IOException{
+		ExifInterface exif = new ExifInterface(path);
+    	int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+    	int rotationInDegrees = exifToDegrees(rotation);
+    	return rotationInDegrees;
+	}
+	
 	
 	public static Bitmap decodeBitmap(String names, int reqWidth, int reqHeight) {
 		BitmapFactory.Options options = new BitmapFactory.Options();
