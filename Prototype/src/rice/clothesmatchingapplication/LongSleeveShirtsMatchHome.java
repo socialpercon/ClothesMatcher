@@ -31,6 +31,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class LongSleeveShirtsMatchHome extends Activity {
 
 	private DatabaseHelper databaseHelper = null;
+	private DatabaseHelperM databaseHelperM = null;
 	List<SimpleData> dataList;
 	ArrayList<String> filePathList;
 	public Bitmap bitmap;
@@ -60,7 +61,15 @@ public class LongSleeveShirtsMatchHome extends Activity {
 		GridView gridView = (GridView)findViewById(R.id.gridView1);
 		
 		gridView.setAdapter(new ImageAdapterPartial(this));
-		
+		gridView.setOnItemClickListener (new OnItemClickListener(){
+	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	    v.buildDrawingCache();
+	    bitmap = v.getDrawingCache();
+//	    moveToLongSleeveHome(v);
+	    
+	    	 }
+	    }
+				);
 	}
 
 	@Override
@@ -69,7 +78,18 @@ public class LongSleeveShirtsMatchHome extends Activity {
 		getMenuInflater().inflate(R.menu.long_sleeve_shirts_match_home, menu);
 		return true;
 	}
-
+//adding entries to matches table in db	
+public void loadItemIntoDatabase(String previousFile, String newFile){
+	try {
+		Dao<MatchesData, Integer> matchDao = getHelperM().getMatchesDataDao();
+		MatchesData matches = new MatchesData(previousFile, newFile);
+		matchDao.create(matches);
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+}
 
 protected void onDestroy(){
 	super.onDestroy();
@@ -84,6 +104,13 @@ private DatabaseHelper getHelper(){
 		databaseHelper = DatabaseHelper.getHelper(this);
 	}
 	return databaseHelper;
+}
+//databasehelper for matches
+private DatabaseHelperM getHelperM(){
+	if (databaseHelper == null){
+		databaseHelper = DatabaseHelper.getHelper(this);
+	}
+	return databaseHelperM;
 }
 
 public List<SimpleData> checkDatabaseType(){

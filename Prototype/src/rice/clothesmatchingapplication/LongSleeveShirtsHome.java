@@ -28,9 +28,9 @@ import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class LongSleeveShirtsHome extends Activity {
-	//in individual clothes classes, table creation happens, and loading into listView
+	
 	private DatabaseHelper databaseHelper = null;
-//	List<SimpleData> dataList;
+	List<SimpleData> dataList;
 	ArrayList<String> filePathList;
 	public Bitmap bitmap;
 	private Context mContext;
@@ -41,16 +41,16 @@ public class LongSleeveShirtsHome extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_long_sleeve_shirts_home);
 		
-//		dataList = checkDatabaseType();
-//		filePathList = new ArrayList<String>(dataList.size());
+		dataList = checkDatabaseType();
+		filePathList = new ArrayList<String>(dataList.size());
 		
 		
 		
-//		for (SimpleData data: dataList){
-//			String filePath = data.fileName;
-//			Log.d("filePath", filePath);
-//			filePathList.add(filePath);
-//		}
+		for (SimpleData data: dataList){
+			String filePath = data.fileName;
+			Log.d("filePath", filePath);
+			filePathList.add(filePath);
+		}
 		
 		
 		GridView gridView = (GridView)findViewById(R.id.gridView1);
@@ -74,7 +74,6 @@ public class LongSleeveShirtsHome extends Activity {
 		move.putExtra("BitmapImage", bitmap);
 		startActivity(move);
 	}
-	//instead of bitmap also need filepath name to add to db, need original filepath also in this class 
 	
 
 	@Override
@@ -84,20 +83,6 @@ public class LongSleeveShirtsHome extends Activity {
 		return true;
 	}
 	
-
-	
-public void loadItemIntoDatabase(String previousFile, String newFile){
-	try {
-		Dao<MatchesData, Integer> matchDao = getHelper().getMatchesDataDao();
-		MatchesData matches = new MatchesData(previousFile, newFile);
-		matchDao.create(matches);
-		
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	
-}	
-
 
 protected void onDestroy(){
 	super.onDestroy();
@@ -113,7 +98,7 @@ private DatabaseHelper getHelper(){
 	}
 	return databaseHelper;
 }
-//queries for certain type of clothes in db
+
 public List<SimpleData> checkDatabaseType(){
 	try {
 		Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
