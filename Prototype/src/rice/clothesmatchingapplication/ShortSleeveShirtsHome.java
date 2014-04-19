@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -58,6 +57,7 @@ public class ShortSleeveShirtsHome extends Activity {
 		
 		GridView gridView = (GridView)findViewById(R.id.gridView1);
 		
+		gridView.setAdapter(new ImageAdapterPartial(this));
 		gridView.setOnItemClickListener (new OnItemClickListener(){
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	    v.buildDrawingCache();

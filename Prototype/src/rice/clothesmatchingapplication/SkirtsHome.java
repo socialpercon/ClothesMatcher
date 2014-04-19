@@ -57,6 +57,7 @@ public class SkirtsHome extends Activity {
 		
 		GridView gridView = (GridView)findViewById(R.id.gridView1);
 		
+		gridView.setAdapter(new ImageAdapterPartial(this));
 		gridView.setOnItemClickListener (new OnItemClickListener(){
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	    v.buildDrawingCache();

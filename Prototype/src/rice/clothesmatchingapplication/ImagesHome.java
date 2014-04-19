@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -81,8 +82,17 @@ public class ImagesHome extends Activity {
 	}
 		
 	View insertPhoto(String path){
+		try {
+			
 		Bitmap bm = decodeBitmap(path, 220, 220);
-	     
+	   	int pictureRotation;
+		pictureRotation = getPictureRotation(path);
+		
+		Matrix matrix = new Matrix();
+		matrix.postRotate(pictureRotation);
+		bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+		 
+		
 	    LinearLayout layout = new LinearLayout(getApplicationContext());
 	    layout.setLayoutParams(new LayoutParams(250, 250));
 	    layout.setGravity(Gravity.CENTER);
@@ -94,6 +104,12 @@ public class ImagesHome extends Activity {
 		
 		layout.addView(imageView);
 		return layout;
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 		
 		
