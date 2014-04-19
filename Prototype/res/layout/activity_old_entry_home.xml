@@ -31,6 +31,7 @@
         android:layout_height="75dp"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/imageView1"
+        android:onClick="moveToMatchingHome"
         android:text="@string/AddMatches" />
 
     <Button
@@ -40,6 +41,7 @@
         android:layout_alignLeft="@+id/button2"
         android:layout_alignRight="@+id/button2"
         android:layout_below="@+id/button2"
+        android:onClick="moveToExpertHome1"
         android:text="@string/finishedEditing" />
 
 </RelativeLayout>

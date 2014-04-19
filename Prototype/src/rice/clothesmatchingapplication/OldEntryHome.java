@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,7 +48,17 @@ public static OldEntryHome instance;
 		imageAdapter = new ImageAdapter(instance);
 		
 	}
-
+	
+	public void moveToMatchingHome(View view){
+		Intent move = new Intent(this, MatchingHome.class);
+		startActivity(move);
+	}
+	
+	public void moveToExpertHome1(View view){
+		Intent move = new Intent(this, ExpertHome1.class);
+		startActivity(move);
+		
+	}
 }
 
 
