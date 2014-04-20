@@ -17,7 +17,6 @@ public MatchesData(String type1, String type2){
 	
 	this.type1 = type1;
 	this.type2 = type2;
-		
 	}
 
 //public String getMatches(){

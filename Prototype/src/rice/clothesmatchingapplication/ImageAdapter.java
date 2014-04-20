@@ -66,7 +66,7 @@ public class ImageAdapter extends BaseAdapter{
 			}
         }
 	}
-	
+	//need to add method to return position
 	public String[] getFilePaths(){
 		return filePaths;
 	}

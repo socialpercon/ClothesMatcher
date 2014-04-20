@@ -34,6 +34,7 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	private DatabaseHelperM databaseHelperM = null;
 	List<SimpleData> dataList;
 	ArrayList<String> filePathList;
+	ArrayList<Integer> positionList;
 	public Bitmap bitmap;
 	private Context mContext;
 	public Bitmap[] bits;
@@ -69,10 +70,16 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	    v.buildDrawingCache();
 	    bitmap = v.getDrawingCache();
-//	    moveToLongSleeveHome(v);
-	    
+	    //new addition
+	    String new_filepath = filePathList.get(position);
+	    loadItemIntoDatabase(filePathOriginal, new_filepath);
+	    Log.d("second filepath", new_filepath);
+	
+	    //moveToLongSleeveHome(v);
 	    	 }
+	    	 
 	    }
+		
 				);
 	}
 
@@ -86,8 +93,10 @@ public class LongSleeveShirtsMatchHome extends Activity {
 public void loadItemIntoDatabase(String previousFile, String newFile){
 	try {
 		Dao<MatchesData, Integer> matchDao = getHelperM().getMatchesDataDao();
-		MatchesData matches = new MatchesData(previousFile, newFile);
-		matchDao.create(matches);
+		MatchesData matches1 = new MatchesData(previousFile, newFile);
+		MatchesData matches2 = new MatchesData(newFile, previousFile);
+		matchDao.create(matches1);
+		matchDao.create(matches2);
 		
 	} catch (SQLException e) {
 		e.printStackTrace();
@@ -210,6 +219,8 @@ public ImageAdapterPartial(Context c){
 	public Object getItem(int position){
 	    return bits[position];
 	}
+	
+	
 
 	@Override
 	public long getItemId(int position){
