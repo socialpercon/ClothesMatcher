@@ -177,7 +177,7 @@ public class ImagesHome extends Activity {
 		}
 		return databaseHelper;
 	}
-
+//replace with querying for specific matches
 	public List<SimpleData> checkDatabaseType(){
 		try {
 			Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();

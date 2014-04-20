@@ -21,9 +21,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class PantsMatchHome extends Activity {
 
@@ -33,8 +35,9 @@ public class PantsMatchHome extends Activity {
 	public Bitmap bitmap;
 	private Context mContext;
 	public Bitmap[] bits;
-	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
-	public String filePathOriginal;
+	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	//public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
+	//public String filePathOriginal;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +47,9 @@ public class PantsMatchHome extends Activity {
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
 		
-		Intent intent = getIntent();
-		Bundle bundle = intent.getExtras();
-		filePathOriginal = bundle.getString(EXTRA_MESSAGE2);
+//		Intent intent = getIntent();
+//		Bundle bundle = intent.getExtras();
+//		filePathOriginal = bundle.getString(EXTRA_MESSAGE2);
 		
 		for (SimpleData data: dataList){
 			String filePath = data.fileName;
@@ -59,8 +62,22 @@ public class PantsMatchHome extends Activity {
 		GridView gridView = (GridView)findViewById(R.id.gridView1);
 		
 		gridView.setAdapter(new ImageAdapterPartial(this));
+		gridView.setOnItemClickListener (new OnItemClickListener(){
+	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	    v.buildDrawingCache();
+	    bitmap = v.getDrawingCache();
+	    moveToLongSleeveHome(v);
+	    
+	    }
+	    }
+	    		 );
 		
-		
+	}
+	public void moveToLongSleeveHome(View view) {
+		Intent move = new Intent(this, ImagesHome.class);
+		move.putExtra("BitmapImage", bitmap);
+		move.putExtra(EXTRA_MESSAGE, "Pants");
+		startActivity(move);
 	}
 
 	@Override

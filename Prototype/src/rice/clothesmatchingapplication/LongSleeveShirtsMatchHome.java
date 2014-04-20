@@ -34,10 +34,11 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	private DatabaseHelperM databaseHelperM = null;
 	List<SimpleData> dataList;
 	ArrayList<String> filePathList;
-	ArrayList<Integer> positionList;
+
 	public Bitmap bitmap;
 	private Context mContext;
 	public Bitmap[] bits;
+	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
 	public String filePathOriginal;
 	//public SharedPreferences filepath; 
@@ -54,12 +55,14 @@ public class LongSleeveShirtsMatchHome extends Activity {
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 		filePathOriginal = bundle.getString(EXTRA_MESSAGE2);
+		Log.d("original filepath", filePathOriginal);
 		
 		for (SimpleData data: dataList){
 			String filePath = data.fileName;
-			Log.d("filePath", filePath);
+			//Log.d("filePath", filePath);
 			filePathList.add(filePath);
 		}
+		//all above works
 		
 		
 		
@@ -72,16 +75,25 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	    bitmap = v.getDrawingCache();
 	    //new addition
 	    String new_filepath = filePathList.get(position);
-	    loadItemIntoDatabase(filePathOriginal, new_filepath);
+	    
 	    Log.d("second filepath", new_filepath);
-	
-	    //moveToLongSleeveHome(v);
+	    //may not have anything 
+	    loadItemIntoDatabase(filePathOriginal, new_filepath);
+	    moveToLongSleeveHome(v);
 	    	 }
 	    	 
 	    }
 		
 				);
 	}
+	
+	public void moveToLongSleeveHome(View view) {
+		Intent move = new Intent(this, ImagesHome.class);
+		move.putExtra("BitmapImage", bitmap);
+		move.putExtra(EXTRA_MESSAGE, "Long Sleeve Shirts");
+		startActivity(move);
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -89,14 +101,22 @@ public class LongSleeveShirtsMatchHome extends Activity {
 		getMenuInflater().inflate(R.menu.long_sleeve_shirts_match_home, menu);
 		return true;
 	}
+	
+	private DatabaseHelperM getHelperM(){
+		if (databaseHelperM == null){
+			databaseHelperM = DatabaseHelperM.getHelper(this);
+		}
+		return databaseHelperM;
+	}
+	
 //adding entries to matches table in db	
 public void loadItemIntoDatabase(String previousFile, String newFile){
 	try {
 		Dao<MatchesData, Integer> matchDao = getHelperM().getMatchesDataDao();
 		MatchesData matches1 = new MatchesData(previousFile, newFile);
-		MatchesData matches2 = new MatchesData(newFile, previousFile);
+		//MatchesData matches2 = new MatchesData(newFile, previousFile);
 		matchDao.create(matches1);
-		matchDao.create(matches2);
+		//matchDao.create(matches2);
 		
 	} catch (SQLException e) {
 		e.printStackTrace();
@@ -118,13 +138,8 @@ private DatabaseHelper getHelper(){
 	}
 	return databaseHelper;
 }
-//databasehelper for matches
-private DatabaseHelperM getHelperM(){
-	if (databaseHelper == null){
-		databaseHelper = DatabaseHelper.getHelper(this);
-	}
-	return databaseHelperM;
-}
+
+
 
 public List<SimpleData> checkDatabaseType(){
 	try {
@@ -170,10 +185,10 @@ public ImageAdapterPartial(Context c){
 		
 	    for (int i=0; i< filePathList.size(); i++){  
 	    	try {
-	    	Log.d("FilePath", filePathList.get(i));
+	    	//Log.d("FilePath", filePathList.get(i));
 	    	Bitmap bitmap = decodeBitmap(filePathList.get(i),250,250);
 	    	if (bitmap == null){
-	    		Log.d("ERROR", "BITMAP IS NULL");
+	    		//Log.d("ERROR", "BITMAP IS NULL");
 	    	}
 	    	int pictureRotation;
 			pictureRotation = getPictureRotation(filePathList.get(i));
@@ -186,7 +201,8 @@ public ImageAdapterPartial(Context c){
 			}
         }
 	}
-	
+
+
 	private int exifToDegrees(int exifOrientation) {        
 	    if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) { return 90; } 
 	    else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180) {  return 180; } 

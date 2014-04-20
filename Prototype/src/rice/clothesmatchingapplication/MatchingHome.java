@@ -1,6 +1,5 @@
 package rice.clothesmatchingapplication;
 
-import java.io.IOException;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -49,7 +48,7 @@ public class MatchingHome extends Activity {
 	
 
 	public void moveToPantsHome(View view){
-		Intent move = new Intent(this, PantsMatchHome.class);
+		Intent move = new Intent(this, PantsHome.class);
 		move.putExtra(EXTRA_MESSAGE2, filePath);
 		startActivity(move);
 		

@@ -74,7 +74,6 @@ import com.j256.ormlite.table.TableUtils;
 		public void close() {
 			if (usageCounter.decrementAndGet() == 0) {
 				super.close();
-				
 				matchDao = null;
 				helper = null;
 			}
