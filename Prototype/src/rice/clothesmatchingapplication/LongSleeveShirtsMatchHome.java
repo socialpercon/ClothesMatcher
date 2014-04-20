@@ -216,7 +216,7 @@ public ImageAdapterPartial(Context c){
     	int rotationInDegrees = exifToDegrees(rotation);
     	return rotationInDegrees;
 	}
-	
+	//out of memory
 	public Bitmap decodeBitmap(String names, int reqWidth, int reqHeight) {
 		
 		BitmapFactory.Options options = new BitmapFactory.Options();
