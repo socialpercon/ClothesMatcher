@@ -38,6 +38,8 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	public Bitmap bitmap;
 	private Context mContext;
 	public Bitmap[] bits;
+	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
+	public String filePathOriginal;
 	//public SharedPreferences filepath; 
 	
 	@Override
@@ -49,7 +51,9 @@ public class LongSleeveShirtsMatchHome extends Activity {
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
 		
-		
+		Intent intent = getIntent();
+		Bundle bundle = intent.getExtras();
+		filePathOriginal = bundle.getString(EXTRA_MESSAGE2);
 		
 		for (SimpleData data: dataList){
 			String filePath = data.fileName;
@@ -68,9 +72,10 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	    bitmap = v.getDrawingCache();
 	    //new addition
 	    String new_filepath = filePathList.get(position);
+	    loadItemIntoDatabase(filePathOriginal, new_filepath);
 	    Log.d("second filepath", new_filepath);
 	
-//	    moveToLongSleeveHome(v);
+	    //moveToLongSleeveHome(v);
 	    	 }
 	    	 
 	    }
@@ -88,8 +93,10 @@ public class LongSleeveShirtsMatchHome extends Activity {
 public void loadItemIntoDatabase(String previousFile, String newFile){
 	try {
 		Dao<MatchesData, Integer> matchDao = getHelperM().getMatchesDataDao();
-		MatchesData matches = new MatchesData(previousFile, newFile);
-		matchDao.create(matches);
+		MatchesData matches1 = new MatchesData(previousFile, newFile);
+		MatchesData matches2 = new MatchesData(newFile, previousFile);
+		matchDao.create(matches1);
+		matchDao.create(matches2);
 		
 	} catch (SQLException e) {
 		e.printStackTrace();
