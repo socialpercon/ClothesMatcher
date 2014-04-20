@@ -32,6 +32,7 @@
         android:layout_alignBaseline="@+id/button1"
         android:layout_alignBottom="@+id/button1"
         android:layout_toRightOf="@+id/button1"
+        android:onClick="moveToShortSleeveShirtsHome"
         android:text="@string/ShortSleeveShirtsCategory" />
 
     <Button
@@ -40,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button1"
         android:layout_below="@+id/button1"
+        android:onClick="moveToPantsHome"
         android:text="@string/PantsCategory" />
 
     <Button
@@ -49,6 +51,7 @@
         android:layout_alignBaseline="@+id/button3"
         android:layout_alignBottom="@+id/button3"
         android:layout_alignLeft="@+id/button2"
+        android:onClick="moveToSkirtsHome"
         android:text="@string/SkirtsCategory" />
 
     <Button
@@ -57,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button3"
         android:layout_below="@+id/button3"
+        android:onClick="moveToShoesHome"
         android:text="@string/ShoesCategory" />
 
 </RelativeLayout>
