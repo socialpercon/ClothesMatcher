@@ -14,6 +14,7 @@ public class MatchingHome extends Activity {
 	public final static String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	public final static String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
 	public String filePath;
+	public String TAG = "MatchingHome";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class MatchingHome extends Activity {
 	public void moveToNewEntryHome(View view){
 		Intent move = new Intent(this, NewEntryHome.class);
 		move.putExtra(EXTRA_MESSAGE, filePath);
-		Log.d("FilePath", filePath);
+		Log.d(TAG, filePath);
 		startActivity(move);
 	}
 	

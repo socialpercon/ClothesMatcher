@@ -17,7 +17,7 @@ import com.j256.ormlite.table.TableUtils;
 		private static final String DATABASE_NAME = "ClothesMatchingDb.db";
 		private static final int DATABASE_VERSION = 2;
 		private Dao<SimpleData, Integer> simpleDao = null;
-		private Dao<MatchesData, Integer> matchDao = null;
+	
 		public static DatabaseHelper helper = null;
 		private static final AtomicInteger usageCounter = new AtomicInteger(0);
 		
@@ -46,16 +46,7 @@ import com.j256.ormlite.table.TableUtils;
 		}
 		}
 		
-		public void onCreateM(SQLiteDatabase db, ConnectionSource connectionSource) {
-			try{
-				Log.i(DatabaseHelper.class.getName(), "onCreate");
-				TableUtils.createTable(connectionSource, MatchesData.class);
-			} 
-			catch (SQLException e) {
-				Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
-				throw new RuntimeException(e);
-		}
-		}
+	
 			
 
 		@Override
@@ -72,17 +63,7 @@ import com.j256.ormlite.table.TableUtils;
 		}
 		
 	
-		public void onUpgradeM(SQLiteDatabase db, ConnectionSource connectionSource, int oldVer,
-				int newVer) {
-			try{
-				TableUtils.dropTable(connectionSource, MatchesData.class, true);
-				onCreate(db, connectionSource);
-			}
-			catch(SQLException e){
-			throw new RuntimeException(e);
-			}
-			
-		}
+		
 		
 		public Dao<SimpleData, Integer> getSimpleDataDao() throws SQLException {
 			if (simpleDao == null) {
@@ -91,18 +72,13 @@ import com.j256.ormlite.table.TableUtils;
 			return simpleDao;
 		}
 		
-		public Dao<MatchesData, Integer> getMatchesDataDao() throws SQLException {
-			if (matchDao == null) {
-				matchDao = getDao(MatchesData.class);
-			}
-			return matchDao;
-		}
+		
 		
 		public void close() {
 			if (usageCounter.decrementAndGet() == 0) {
 				super.close();
 				simpleDao = null;
-				matchDao = null;
+				
 				helper = null;
 			}
 		}

@@ -20,6 +20,7 @@ public class ImageAdapter extends BaseAdapter{
 	private Context mContext;
 	public Bitmap[] bits;
 	public String[] filePaths;
+	public String TAG = "ImageAdapter";
 	
 	public static int calculateInSampleSize(BitmapFactory.Options options, int reqHeight, int reqWidth){
 
@@ -40,7 +41,7 @@ public class ImageAdapter extends BaseAdapter{
 	}
 	
 	
-	public ImageAdapter(Context c){
+	public ImageAdapter(Context c){ //printing out all items take in camera
 		File sdCard = Environment.getExternalStorageDirectory();
 		File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
 		File[] names = directory.listFiles();
@@ -53,7 +54,7 @@ public class ImageAdapter extends BaseAdapter{
 	    for (int i=0; i< names.length; i++){
 	    	try {
 	    	filePaths[i] = names[i].getAbsolutePath();
-	    	Log.d("FilePath", names[i].getAbsolutePath());
+	    	Log.d(TAG, names[i].getAbsolutePath());
 	    	Bitmap bitmap = decodeBitmap(names[i].getAbsolutePath(),250,250);
 	    	int pictureRotation;
 				pictureRotation = getPictureRotation(names[i].getAbsolutePath());

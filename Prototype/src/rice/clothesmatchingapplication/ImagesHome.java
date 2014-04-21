@@ -31,11 +31,12 @@ import android.widget.LinearLayout;
 
 public class ImagesHome extends Activity {
 	
-	private DatabaseHelper databaseHelper = null;
+	private DatabaseHelperM databaseHelper = null;
 	public static ImagesHome instance;
-	public ImageAdapter imageAdapter; 
-	public String category;
+//	public ImageAdapter imageAdapter; 
+	public String original_file;
 	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	//need to get original filepath
 	public ImagesHome() {
 		instance = this;
 	}
@@ -44,7 +45,7 @@ public class ImagesHome extends Activity {
 		return instance;
 	}
 	LinearLayout myGallery;
-	List<SimpleData> dataList;
+	List<MatchesData> dataList;
 	ArrayList<String> filePathList;
 
 	@Override
@@ -55,21 +56,22 @@ public class ImagesHome extends Activity {
 		Intent intent = getIntent();
 		Bitmap bitmap = (Bitmap) intent.getParcelableExtra("BitmapImage");
 		Bundle bundle = intent.getExtras();
-		category = bundle.getString(EXTRA_MESSAGE);
+		original_file = bundle.getString(EXTRA_MESSAGE);
 		
 		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
 		imageView.setImageBitmap(bitmap);
 		
-		imageAdapter = new ImageAdapter(instance);	
+//		imageAdapter = new ImageAdapter(instance);	
 		
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
 		
 		
 		
-		for (SimpleData data: dataList){
-			String filePath = data.fileName;
-			Log.d("filePath", filePath);
+		for (MatchesData data: dataList){
+			//add second item in table if first item =original filepath
+			String filePath = data.type2;
+			Log.d("Item2", filePath);
 			filePathList.add(filePath);
 		}
 		
@@ -171,34 +173,37 @@ public class ImagesHome extends Activity {
 		}
 	}
 
-	private DatabaseHelper getHelper(){
+	private DatabaseHelperM getHelper(){
 		if (databaseHelper == null){
-			databaseHelper = DatabaseHelper.getHelper(this);
+			databaseHelper = DatabaseHelperM.getHelper(this);
 		}
 		return databaseHelper;
 	}
 //replace with querying for specific matches
-	public List<SimpleData> checkDatabaseType(){
+	public List<MatchesData> checkDatabaseType(){
 		try {
-			Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
-			QueryBuilder<SimpleData,Integer> queryBuilder = simpleDao.queryBuilder();
-			if (category.equals("Long Sleeve Shirts")){
-			queryBuilder.where().eq("type", "Long Sleeve Shirts");
-			}
-			if (category.equals("Short Sleeve Shirts")){
-				queryBuilder.where().eq("type", "Short Sleeve Shirts");
-			}
+			Dao<MatchesData, Integer> matchDao = getHelper().getMatchesDataDao();
+			QueryBuilder<MatchesData,Integer> queryBuilder = matchDao.queryBuilder();
+			
+			queryBuilder.where().eq("type", original_file);
+//			if (category.equals("Long Sleeve Shirts")){
+//			queryBuilder.where().eq("type", "Long Sleeve Shirts");
+//			}
+//			if (category.equals("Short Sleeve Shirts")){
+//				queryBuilder.where().eq("type", "Short Sleeve Shirts");
+//			}
+//				
+//			if (category.equals("Pants")){
+//				queryBuilder.where().eq("type", "Pants");
+//			}
+//				
+//			if (category.equals("Shorts")){
+//				queryBuilder.where().eq("type", "Shorts");
+//			}
+			
 				
-			if (category.equals("Pants")){
-				queryBuilder.where().eq("type", "Pants");
-			}
-				
-			if (category.equals("Shorts")){
-				queryBuilder.where().eq("type", "Shorts");
-			}
-				
-			PreparedQuery<SimpleData> preparedQuery = queryBuilder.prepare();
-			List<SimpleData> dataList = simpleDao.query(preparedQuery);
+			PreparedQuery<MatchesData> preparedQuery = queryBuilder.prepare();
+			List<MatchesData> dataList = matchDao.query(preparedQuery);
 			return dataList;
 		} catch (SQLException e) {
 			

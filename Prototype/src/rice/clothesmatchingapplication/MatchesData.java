@@ -1,7 +1,7 @@
 package rice.clothesmatchingapplication;
 import com.j256.ormlite.field.DatabaseField;
 public class MatchesData {
-@DatabaseField(index=true)
+@DatabaseField(columnName = "type")
 String type1;
 @DatabaseField
 String type2;

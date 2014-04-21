@@ -79,7 +79,7 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	    Log.d("second filepath", new_filepath);
 	    //may not have anything 
 	    loadItemIntoDatabase(filePathOriginal, new_filepath);
-	    moveToLongSleeveHome(v);
+	    moveToImagesHome(v);
 	    	 }
 	    	 
 	    }
@@ -87,10 +87,10 @@ public class LongSleeveShirtsMatchHome extends Activity {
 				);
 	}
 	
-	public void moveToLongSleeveHome(View view) {
+	public void moveToImagesHome(View view) {
 		Intent move = new Intent(this, ImagesHome.class);
 		move.putExtra("BitmapImage", bitmap);
-		move.putExtra(EXTRA_MESSAGE, "Long Sleeve Shirts");
+		move.putExtra(EXTRA_MESSAGE, filePathOriginal);
 		startActivity(move);
 	}
 	
@@ -126,9 +126,11 @@ public void loadItemIntoDatabase(String previousFile, String newFile){
 
 protected void onDestroy(){
 	super.onDestroy();
-	if(databaseHelper!=null){
+	if(databaseHelper!=null || databaseHelperM !=null){
 		databaseHelper.close();
+		databaseHelperM.close();
 		databaseHelper = null;
+		databaseHelperM = null;
 	}
 }
 
@@ -156,7 +158,7 @@ public List<SimpleData> checkDatabaseType(){
 	return null;
 	
 }
-
+//need this to display images of certian category
 private class ImageAdapterPartial extends BaseAdapter{	
 	
 	public int calculateInSampleSize(BitmapFactory.Options options, int reqHeight, int reqWidth){
