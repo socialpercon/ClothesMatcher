@@ -10,21 +10,21 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="75dp"
+        android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_alignLeft="@+id/buttonDoneMatchEditing"
         android:layout_below="@+id/buttonDoneMatchEditing"
         android:onClick="moveToEditHome"
-        android:background="@drawable/emme_edit"/>
+        android:background="@drawable/emme_edit_new"/>
 
     <Button
         android:id="@+id/buttonDoneMatchEditing"
-        android:layout_width="75dp"
+        android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="116dp"
-        android:background="@drawable/emme_camera"
+        android:background="@drawable/emme_camera_new"
         android:onClick="moveToCamera" />
 
 </RelativeLayout>
