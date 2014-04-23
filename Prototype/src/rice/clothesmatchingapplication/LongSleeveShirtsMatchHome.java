@@ -77,9 +77,10 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	    String new_filepath = filePathList.get(position);
 	    
 	    Log.d("second filepath", new_filepath);
+	    Log.d("original filepath", filePathOriginal);
 	    //may not have anything 
 	    loadItemIntoDatabase(filePathOriginal, new_filepath);
-	    moveToImagesHome(v);
+	    moveToLongSleeveHome(v);
 	    	 }
 	    	 
 	    }
@@ -87,7 +88,7 @@ public class LongSleeveShirtsMatchHome extends Activity {
 				);
 	}
 	
-	public void moveToImagesHome(View view) {
+	public void moveToLongSleeveHome(View view) {
 		Intent move = new Intent(this, ImagesHome.class);
 		move.putExtra("BitmapImage", bitmap);
 		move.putExtra(EXTRA_MESSAGE, filePathOriginal);
@@ -114,6 +115,7 @@ public void loadItemIntoDatabase(String previousFile, String newFile){
 	try {
 		Dao<MatchesData, Integer> matchDao = getHelperM().getMatchesDataDao();
 		MatchesData matches1 = new MatchesData(previousFile, newFile);
+
 		//MatchesData matches2 = new MatchesData(newFile, previousFile);
 		matchDao.create(matches1);
 		//matchDao.create(matches2);
@@ -126,11 +128,9 @@ public void loadItemIntoDatabase(String previousFile, String newFile){
 
 protected void onDestroy(){
 	super.onDestroy();
-	if(databaseHelper!=null || databaseHelperM !=null){
+	if(databaseHelper!=null){
 		databaseHelper.close();
-		databaseHelperM.close();
 		databaseHelper = null;
-		databaseHelperM = null;
 	}
 }
 
@@ -158,7 +158,7 @@ public List<SimpleData> checkDatabaseType(){
 	return null;
 	
 }
-//need this to display images of certian category
+
 private class ImageAdapterPartial extends BaseAdapter{	
 	
 	public int calculateInSampleSize(BitmapFactory.Options options, int reqHeight, int reqWidth){

@@ -14,7 +14,7 @@ import com.j256.ormlite.table.TableUtils;
 
 
 	public class DatabaseHelperM extends OrmLiteSqliteOpenHelper{
-		private static final String DATABASE_NAME = "ClothesMatchingDb.db";
+		private static final String DATABASE_NAME = "ClothesMatchingMatchingDb.db";
 		private static final int DATABASE_VERSION = 1;
 		
 		private Dao<MatchesData, Integer> matchDao = null;

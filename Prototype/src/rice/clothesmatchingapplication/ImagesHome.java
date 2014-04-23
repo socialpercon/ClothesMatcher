@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Gallery;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -33,10 +32,10 @@ public class ImagesHome extends Activity {
 	
 	private DatabaseHelperM databaseHelper = null;
 	public static ImagesHome instance;
-//	public ImageAdapter imageAdapter; 
+	public ImageAdapter imageAdapter; 
+	public String category;
 	public String original_file;
 	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
-	//need to get original filepath
 	public ImagesHome() {
 		instance = this;
 	}
@@ -61,7 +60,7 @@ public class ImagesHome extends Activity {
 		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
 		imageView.setImageBitmap(bitmap);
 		
-//		imageAdapter = new ImageAdapter(instance);	
+		imageAdapter = new ImageAdapter(instance);	
 		
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
@@ -69,9 +68,8 @@ public class ImagesHome extends Activity {
 		
 		
 		for (MatchesData data: dataList){
-			//add second item in table if first item =original filepath
-			String filePath = data.type2;
-			Log.d("Item2", filePath);
+			String filePath = data.type1;
+			Log.d("filePath", filePath);
 			filePathList.add(filePath);
 		}
 		
@@ -172,20 +170,21 @@ public class ImagesHome extends Activity {
 			databaseHelper = null;
 		}
 	}
-
+	
 	private DatabaseHelperM getHelper(){
-		if (databaseHelper == null){
+		if(databaseHelper == null){
 			databaseHelper = DatabaseHelperM.getHelper(this);
+			
 		}
 		return databaseHelper;
 	}
+	
 //replace with querying for specific matches
 	public List<MatchesData> checkDatabaseType(){
 		try {
-			Dao<MatchesData, Integer> matchDao = getHelper().getMatchesDataDao();
-			QueryBuilder<MatchesData,Integer> queryBuilder = matchDao.queryBuilder();
-			
-			queryBuilder.where().eq("type", original_file);
+			Dao<MatchesData, Integer> matchesDao = getHelper().getMatchesDataDao();
+			QueryBuilder<MatchesData,Integer> queryBuilder = matchesDao.queryBuilder();
+			queryBuilder.where().eq("type1", original_file);
 //			if (category.equals("Long Sleeve Shirts")){
 //			queryBuilder.where().eq("type", "Long Sleeve Shirts");
 //			}
@@ -200,10 +199,9 @@ public class ImagesHome extends Activity {
 //			if (category.equals("Shorts")){
 //				queryBuilder.where().eq("type", "Shorts");
 //			}
-			
 				
 			PreparedQuery<MatchesData> preparedQuery = queryBuilder.prepare();
-			List<MatchesData> dataList = matchDao.query(preparedQuery);
+			List<MatchesData> dataList = matchesDao.query(preparedQuery);
 			return dataList;
 		} catch (SQLException e) {
 			
