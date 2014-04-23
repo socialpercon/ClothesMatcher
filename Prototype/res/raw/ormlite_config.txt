@@ -1,5 +1,5 @@
 #
-# generated on 2014/04/23 12:06:58
+# generated on 2014/04/23 01:07:55
 #
 # --table-start--
 dataClass=rice.clothesmatchingapplication.SimpleData
@@ -20,12 +20,12 @@ dataClass=rice.clothesmatchingapplication.MatchesData
 tableName=matchesdata
 # --table-fields-start--
 # --field-start--
-fieldName=original
-columnName=original
+fieldName=type1
+columnName=type1
 # --field-end--
 # --field-start--
-fieldName=match
-columnName=match
+fieldName=type2
+columnName=type2
 # --field-end--
 # --table-fields-end--
 # --table-end--

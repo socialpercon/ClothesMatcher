@@ -41,6 +41,7 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
 	public String filePathOriginal;
+	public String new_filepath;
 	//public SharedPreferences filepath; 
 	
 	@Override
@@ -71,10 +72,10 @@ public class LongSleeveShirtsMatchHome extends Activity {
 		gridView.setAdapter(new ImageAdapterPartial(this));
 		gridView.setOnItemClickListener (new OnItemClickListener(){
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	    v.buildDrawingCache();
-	    bitmap = v.getDrawingCache();
+//	    v.buildDrawingCache();
+//	    bitmap = v.getDrawingCache();
 	    //new addition
-	    String new_filepath = filePathList.get(position);
+	    new_filepath = filePathList.get(position);
 	    
 	    Log.d("second filepath", new_filepath);
 	    Log.d("original filepath", filePathOriginal);
@@ -91,6 +92,7 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	public void moveToLongSleeveHome(View view) {
 		Intent move = new Intent(this, ImagesHome.class);
 		move.putExtra("BitmapImage", bitmap);
+		move.putExtra(EXTRA_MESSAGE2, new_filepath);
 		move.putExtra(EXTRA_MESSAGE, filePathOriginal);
 		startActivity(move);
 	}

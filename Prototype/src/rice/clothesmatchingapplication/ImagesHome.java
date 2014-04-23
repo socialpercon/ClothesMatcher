@@ -35,7 +35,10 @@ public class ImagesHome extends Activity {
 	public ImageAdapter imageAdapter; 
 	public String category;
 	public String original_file;
+	public String match_file;
 	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
+	
 	public ImagesHome() {
 		instance = this;
 	}
@@ -53,22 +56,21 @@ public class ImagesHome extends Activity {
 		setContentView(R.layout.activity_long_sleeve_home);
 		
 		Intent intent = getIntent();
-		Bitmap bitmap = (Bitmap) intent.getParcelableExtra("BitmapImage");
+//		Bitmap bitmap = (Bitmap) intent.getParcelableExtra("BitmapImage");
 		Bundle bundle = intent.getExtras();
 		original_file = bundle.getString(EXTRA_MESSAGE);
+		match_file = bundle.getString(EXTRA_MESSAGE2);
 		
-		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
-		imageView.setImageBitmap(bitmap);
-		
-		imageAdapter = new ImageAdapter(instance);	
-		
+		//ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+		//imageView.setImageBitmap(bitmap);
+		loadIntoImageView(original_file);
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
 		
 		
 		
 		for (MatchesData data: dataList){
-			String filePath = data.type1;
+			String filePath = data.type2;
 			Log.d("filePath", filePath);
 			filePathList.add(filePath);
 		}
@@ -112,7 +114,28 @@ public class ImagesHome extends Activity {
 		return null;
 	}
 		
+	public void loadIntoImageView(String path){
+		try {
+		Log.d("Path", "Path: " + path);
+		Bitmap bitmap = decodeBitmap(path,250,250);
 		
+		int pictureRotation;
+		
+			pictureRotation = getPictureRotation(path);
+		Matrix matrix = new Matrix();
+		matrix.postRotate(pictureRotation);
+		bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+	
+		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+		imageView.setImageBitmap(bitmap);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	private int exifToDegrees(int exifOrientation) {        
 	    if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) { return 90; } 
 	    else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180) {  return 180; } 
@@ -184,7 +207,7 @@ public class ImagesHome extends Activity {
 		try {
 			Dao<MatchesData, Integer> matchesDao = getHelper().getMatchesDataDao();
 			QueryBuilder<MatchesData,Integer> queryBuilder = matchesDao.queryBuilder();
-			queryBuilder.where().eq("type1", original_file);
+			queryBuilder.where().eq("type2", match_file);
 //			if (category.equals("Long Sleeve Shirts")){
 //			queryBuilder.where().eq("type", "Long Sleeve Shirts");
 //			}
