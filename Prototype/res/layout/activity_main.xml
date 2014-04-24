@@ -19,7 +19,7 @@
 
     <Button
         android:id="@+id/buttonToExpertHome"
-        android:layout_width="75dp"
+        android:layout_width="100dp"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

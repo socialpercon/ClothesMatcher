@@ -18,49 +18,42 @@
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:onClick="moveToLongSleeveShirtsHome"
-        android:text="@string/LongSleeveShirtsCategory" />
+        android:background="@drawable/emme_shortsleeves"/>
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignBaseline="@+id/button1"
         android:layout_alignBottom="@+id/button1"
         android:layout_toRightOf="@+id/button1"
         android:onClick="moveToShortSleeveShirtsHome"
-        android:text="@string/ShortSleeveShirtsCategory" />
+        android:background="@drawable/emme_longsleeves"/>
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignLeft="@+id/button1"
         android:layout_below="@+id/button1"
         android:onClick="moveToPantsHome"
-        android:text="@string/PantsCategory" />
+        android:background="@drawable/emme_pants" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignBaseline="@+id/button3"
         android:layout_alignBottom="@+id/button3"
         android:layout_alignLeft="@+id/button2"
         android:onClick="moveToSkirtsHome"
-        android:text="@string/SkirtsCategory" />
+        android:background="@drawable/emme_shorts" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_below="@+id/button3"
-        android:onClick="moveToShoesHome"
-        android:text="@string/ShoesCategory" />
+   
 
 </RelativeLayout>
