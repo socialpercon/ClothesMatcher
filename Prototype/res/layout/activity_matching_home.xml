@@ -23,7 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:onClick="moveToLongSleeveShirtsHome"
-        android:background="@drawable/emme_shortsleeves"/>
+        android:background="@drawable/emme_longsleeves"/>
 
     <Button
         android:id="@+id/button2"
@@ -33,7 +33,7 @@
         android:layout_alignBottom="@+id/button1"
         android:layout_toRightOf="@+id/button1"
         android:onClick="moveToShortSleeveShirtsHome"
-        android:background="@drawable/emme_longsleeves"/>
+        android:background="@drawable/emme_shortsleeves"/>
 
     <Button
         android:id="@+id/button3"
