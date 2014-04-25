@@ -48,7 +48,7 @@ public class MatchingHome extends Activity {
 	
 
 	public void moveToPantsHome(View view){
-		Intent move = new Intent(this, PantsHome.class);
+		Intent move = new Intent(this, PantsMatchHome.class);
 		move.putExtra(EXTRA_MESSAGE2, filePath);
 		startActivity(move);
 		

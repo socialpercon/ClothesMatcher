@@ -49,7 +49,7 @@ public class ExpertHome1 extends Activity {
 	}
 	
 	public void moveToMainActivity(View view){
-		Intent move = new Intent(this, EditHome1.class);
+		Intent move = new Intent(this, MainActivity.class);
 		startActivity(move);
 	}
 
