@@ -23,7 +23,7 @@
         android:layout_height="75dp"
         android:layout_alignLeft="@+id/buttonDoneMatchEditing"
         android:layout_below="@+id/buttonDoneMatchEditing"
-        android:text="@string/DeleteMatches" />
+        android:background="@drawable/emme_delete" />
 
     <Button
         android:id="@+id/buttonDoneMatchEditing"
@@ -32,16 +32,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/imageView1"
         android:onClick="moveToMatchingHome"
-        android:text="@string/AddMatches" />
+        android:background="@drawable/emme_add" />
 
     <Button
         android:id="@+id/buttonDone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignLeft="@+id/button2"
         android:layout_alignRight="@+id/button2"
         android:layout_below="@+id/button2"
         android:onClick="moveToExpertHome1"
-        android:text="@string/finishedEditing" />
+        android:background="@drawable/emme_done" />
 
 </RelativeLayout>
