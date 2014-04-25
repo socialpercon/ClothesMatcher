@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginTop="20dp" />
 
     <Button
@@ -72,6 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/buttonDoneMatchEditing"
+        android:layout_alignParentLeft="true"
         android:layout_alignLeft="@+id/spinner1"
         android:layout_marginLeft="28dp"
         android:src="@drawable/ic_launcher" />
