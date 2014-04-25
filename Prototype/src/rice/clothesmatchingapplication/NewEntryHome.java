@@ -144,7 +144,8 @@ public class NewEntryHome extends Activity {
 			e.printStackTrace();
 		}
 		return null;
-	}
+
+}
 
 
 	

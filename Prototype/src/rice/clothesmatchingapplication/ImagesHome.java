@@ -208,21 +208,6 @@ public class ImagesHome extends Activity {
 			Dao<MatchesData, Integer> matchesDao = getHelper().getMatchesDataDao();
 			QueryBuilder<MatchesData,Integer> queryBuilder = matchesDao.queryBuilder();
 			queryBuilder.where().eq("type1", original_file);
-//			if (category.equals("Long Sleeve Shirts")){
-//			queryBuilder.where().eq("type", "Long Sleeve Shirts");
-//			}
-//			if (category.equals("Short Sleeve Shirts")){
-//				queryBuilder.where().eq("type", "Short Sleeve Shirts");
-//			}
-//				
-//			if (category.equals("Pants")){
-//				queryBuilder.where().eq("type", "Pants");
-//			}
-//				
-//			if (category.equals("Shorts")){
-//				queryBuilder.where().eq("type", "Shorts");
-//			}
-				
 			PreparedQuery<MatchesData> preparedQuery = queryBuilder.prepare();
 			List<MatchesData> dataList = matchesDao.query(preparedQuery);
 			return dataList;
