@@ -39,7 +39,7 @@ import com.j256.ormlite.table.TableUtils;
 				Log.i(DatabaseHelper.class.getName(), "onCreate");
 				TableUtils.createTable(connectionSource, MatchesData.class);
 				//TableUtils.createTable(connectionSource, MatchesData.class);
-			} 
+				} 
 			catch (SQLException e) {
 				Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
 				throw new RuntimeException(e);
@@ -54,6 +54,7 @@ import com.j256.ormlite.table.TableUtils;
 			try{
 				TableUtils.dropTable(connectionSource, MatchesData.class, true);
 				onCreate(db, connectionSource);
+				
 			}
 			catch(SQLException e){
 			throw new RuntimeException(e);

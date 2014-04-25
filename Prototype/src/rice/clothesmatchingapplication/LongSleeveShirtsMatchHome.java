@@ -8,6 +8,7 @@ import java.util.List;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.table.TableUtils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class LongSleeveShirtsMatchHome extends Activity {
@@ -42,6 +44,7 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
 	public String filePathOriginal;
 	public String new_filepath;
+	
 	//public SharedPreferences filepath; 
 	
 	@Override
@@ -52,7 +55,7 @@ public class LongSleeveShirtsMatchHome extends Activity {
 		//String filePath = filepath.getString("file", "");
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
-		
+
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 		filePathOriginal = bundle.getString(EXTRA_MESSAGE2);
@@ -79,7 +82,7 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	    
 	    Log.d("second filepath", new_filepath);
 	    Log.d("original filepath", filePathOriginal);
-	    //may not have anything 
+	    //may not have anything
 	    loadItemIntoDatabase(filePathOriginal, new_filepath);
 	    moveToLongSleeveHome(v);
 	    	 }
@@ -92,7 +95,6 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	public void moveToLongSleeveHome(View view) {
 		Intent move = new Intent(this, ImagesHome.class);
 		move.putExtra("BitmapImage", bitmap);
-		move.putExtra(EXTRA_MESSAGE2, new_filepath);
 		move.putExtra(EXTRA_MESSAGE, filePathOriginal);
 		startActivity(move);
 	}
@@ -134,6 +136,12 @@ protected void onDestroy(){
 		databaseHelper.close();
 		databaseHelper = null;
 	}
+	
+	if(databaseHelperM!=null){
+		databaseHelperM.close();
+		databaseHelperM =null;
+	}
+	
 }
 
 private DatabaseHelper getHelper(){

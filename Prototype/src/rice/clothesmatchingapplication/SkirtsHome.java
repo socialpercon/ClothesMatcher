@@ -62,17 +62,19 @@ public class SkirtsHome extends Activity {
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	    v.buildDrawingCache();
 	    bitmap = v.getDrawingCache();
-	    moveToLongSleeveHome(v);
+	    String filePath = filePathList.get(position);
+	    
+	    moveToLongSleeveHome(v,filePath);
 	    
 	    }
 	    }
 	    		 );
 	}
 	
-	public void moveToLongSleeveHome(View view) {
+	public void moveToLongSleeveHome(View view, String filePath) {
 		Intent move = new Intent(this, ImagesHome.class);
 		move.putExtra("BitmapImage", bitmap);
-		move.putExtra(EXTRA_MESSAGE, "Skirts");
+		move.putExtra(EXTRA_MESSAGE, filePath);
 		startActivity(move);
 	}
 

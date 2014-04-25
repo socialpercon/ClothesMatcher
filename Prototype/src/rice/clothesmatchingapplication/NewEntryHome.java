@@ -3,10 +3,13 @@ package rice.clothesmatchingapplication;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import android.media.ExifInterface;
 import android.os.Bundle;
@@ -19,28 +22,37 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 public class NewEntryHome extends Activity {
 
 	private final String LOG_TAG = getClass().getSimpleName();
 	private DatabaseHelper databaseHelper = null;
-
+	private DatabaseHelperM databaseHelperM = null;
 	public static final String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
 	public String filePath;
 	public SharedPreferences filepath; 
+	public String filePathOriginal;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_entry_home);
 		filepath = getSharedPreferences("filepath", MODE_PRIVATE);
-			
+		LinearLayout myGallery;
+		List<MatchesData> dataList;
+		ArrayList<String> filePathList;
+
 	
 			Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
 			String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Skirts", "Shoes"};
@@ -49,21 +61,92 @@ public class NewEntryHome extends Activity {
 			
 			Intent moveFrom =  getIntent();
 			Bundle bundle  = moveFrom.getExtras();
+			if (bundle.getString(EXTRA_MESSAGE).equals("picture")==false);{
+			filePathOriginal = bundle.getString(EXTRA_MESSAGE);
+			Log.d("FilePath", filePathOriginal);
+			}
 			filePath = filepath.getString("file", "");
 			
-		    File imageFile = new File(filePath);
+			File imageFile = new File(filePath);
 		    if (imageFile.exists()) {
 		        loadIntoImageview(filePath);
+		    }
+		    
+		    if (filePathOriginal.equals("picture")==false){
+		    dataList = checkDatabaseType();
+			filePathList = new ArrayList<String>(dataList.size());
+			
+			for (MatchesData data: dataList){
+				String filePath = data.type2;
+				Log.d("filePath", filePath);
+				filePathList.add(filePath);
+			}
+			
+
+			myGallery = (LinearLayout) findViewById(R.id.myGallery1);
+			
+			for (int i=0; i< filePathList.size(); i++){
+			myGallery.addView(insertPhoto(filePathList.get(i))); 
+			}
+		    }
 		}
 			
+		View insertPhoto(String path){
+			try {
+				
+			Bitmap bm = decodeBitmap(path, 220, 220);
+		   	int pictureRotation;
+			pictureRotation = getPictureRotation(path);
 			
-	}
+			Matrix matrix = new Matrix();
+			matrix.postRotate(pictureRotation);
+			bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+			 
+			
+		    LinearLayout layout = new LinearLayout(getApplicationContext());
+		    layout.setLayoutParams(new LayoutParams(250, 250));
+		    layout.setGravity(Gravity.CENTER);
+		    
+			ImageView imageView2 = new ImageView(getApplicationContext());
+			imageView2.setImageBitmap(bm);
+			imageView2.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			imageView2.setLayoutParams(new GridView.LayoutParams(250, 250));
+			
+			layout.addView(imageView2);
+			return layout;
+		
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		    
+		
 	
 	public void moveToMatchingHome(View view){
 		Intent move = new Intent(this, MatchingHome.class);
 		move.putExtra(EXTRA_MESSAGE, filePath);
 		startActivity(move);
 	}
+	
+	public List<MatchesData> checkDatabaseType(){
+		try {
+			Dao<MatchesData, Integer> matchesDao = getHelperM().getMatchesDataDao();
+			QueryBuilder<MatchesData,Integer> queryBuilder = matchesDao.queryBuilder();
+			queryBuilder.where().eq("type1", filePathOriginal);
+			PreparedQuery<MatchesData> preparedQuery = queryBuilder.prepare();
+			List<MatchesData> dataList = matchesDao.query(preparedQuery);
+			return dataList;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
 	
 	public void loadItemIntoDatabase(String ClothesName, String ClothesType){
 		try {
@@ -84,6 +167,15 @@ public class NewEntryHome extends Activity {
 	//DeleteBuilder<SimpleData, Integer> deleteBuilder = simpleDao.deleteBuilder();
 	//deleteBuilder.where().eq("type", "Long Sleeve Shirts");
 	//deleteBuilder.delete();
+
+	
+	private DatabaseHelperM getHelperM(){
+		if(databaseHelperM == null){
+			databaseHelperM = DatabaseHelperM.getHelper(this);
+			
+		}
+		return databaseHelperM;
+	}
 	
 	
 	protected void onDestroy(){
@@ -91,6 +183,11 @@ public class NewEntryHome extends Activity {
 		if(databaseHelper==null){
 			databaseHelper.close();
 			databaseHelper = null;
+		}
+		
+		if(databaseHelperM==null){
+			databaseHelperM.close();
+			databaseHelperM=null;
 		}
 	}
 	

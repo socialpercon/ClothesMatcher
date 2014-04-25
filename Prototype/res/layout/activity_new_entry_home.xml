@@ -16,30 +16,12 @@
         android:layout_marginBottom="130dp" />
 
     <Button
-        android:id="@+id/buttonDoneMatchEditing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="122dp"
-        android:onClick="moveToMatchingHome"
-        android:text="@string/AddMatches" />
-
-    <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/buttonDoneMatchEditing"
         android:text="@string/DeleteMatches" />
-
-    <ImageView
-        android:id="@+id/imageViewMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/ic_launcher" />
 
     <Spinner
         android:id="@+id/spinner1"
@@ -57,5 +39,40 @@
         android:layout_below="@+id/spinner1"
         android:onClick="moveToExpertHome"
         android:text="@string/Done" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/gallery1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="72dp" >
+
+        <LinearLayout
+            android:id="@+id/myGallery1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/buttonDoneMatchEditing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="117dp"
+        android:onClick="moveToMatchingHome"
+        android:text="@string/AddMatches" />
+
+    <ImageView
+        android:id="@+id/imageViewMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/buttonDoneMatchEditing"
+        android:layout_alignLeft="@+id/spinner1"
+        android:layout_marginLeft="28dp"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

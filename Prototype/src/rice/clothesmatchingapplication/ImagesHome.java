@@ -57,18 +57,18 @@ public class ImagesHome extends Activity {
 		
 		Intent intent = getIntent();
 //		Bitmap bitmap = (Bitmap) intent.getParcelableExtra("BitmapImage");
+		//ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+		//imageView.setImageBitmap(bitmap);
+				
+		
 		Bundle bundle = intent.getExtras();
 		original_file = bundle.getString(EXTRA_MESSAGE);
 		match_file = bundle.getString(EXTRA_MESSAGE2);
 		
-		//ImageView imageView = (ImageView) findViewById(R.id.imageView1);
-		//imageView.setImageBitmap(bitmap);
 		loadIntoImageView(original_file);
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
-		
-		
-		
+				
 		for (MatchesData data: dataList){
 			String filePath = data.type2;
 			Log.d("filePath", filePath);
@@ -207,7 +207,7 @@ public class ImagesHome extends Activity {
 		try {
 			Dao<MatchesData, Integer> matchesDao = getHelper().getMatchesDataDao();
 			QueryBuilder<MatchesData,Integer> queryBuilder = matchesDao.queryBuilder();
-			queryBuilder.where().eq("type2", match_file);
+			queryBuilder.where().eq("type1", original_file);
 //			if (category.equals("Long Sleeve Shirts")){
 //			queryBuilder.where().eq("type", "Long Sleeve Shirts");
 //			}
