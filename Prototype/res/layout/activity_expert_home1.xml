@@ -27,4 +27,13 @@
         android:background="@drawable/emme_camera_new"
         android:onClick="moveToCamera" />
 
+    <Button
+        android:id="@+id/buttonDoneExpert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="moveToMainActivity"
+        android:text="@string/Done" />
+
 </RelativeLayout>

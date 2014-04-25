@@ -45,14 +45,11 @@ public class LongSleeveShirtsMatchHome extends Activity {
 	public String filePathOriginal;
 	public String new_filepath;
 	
-	//public SharedPreferences filepath; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_long_sleeve_shirts_match_home);
-		//filepath = getSharedPreferences("filepath", MODE_PRIVATE);
-		//String filePath = filepath.getString("file", "");
 		dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
 
@@ -63,26 +60,17 @@ public class LongSleeveShirtsMatchHome extends Activity {
 		
 		for (SimpleData data: dataList){
 			String filePath = data.fileName;
-			//Log.d("filePath", filePath);
 			filePathList.add(filePath);
 		}
-		//all above works
-		
-		
 		
 		GridView gridView = (GridView)findViewById(R.id.gridView1);
 		
 		gridView.setAdapter(new ImageAdapterPartial(this));
 		gridView.setOnItemClickListener (new OnItemClickListener(){
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-//	    v.buildDrawingCache();
-//	    bitmap = v.getDrawingCache();
-	    //new addition
+
 	    new_filepath = filePathList.get(position);
 	    
-	    Log.d("second filepath", new_filepath);
-	    Log.d("original filepath", filePathOriginal);
-	    //may not have anything
 	    loadItemIntoDatabase(filePathOriginal, new_filepath);
 	    moveToLongSleeveHome(v);
 	    	 }
@@ -119,11 +107,17 @@ public void loadItemIntoDatabase(String previousFile, String newFile){
 	try {
 		Dao<MatchesData, Integer> matchDao = getHelperM().getMatchesDataDao();
 		MatchesData matches1 = new MatchesData(previousFile, newFile);
-
+		QueryBuilder<MatchesData,Integer> queryBuilder = matchDao.queryBuilder();
+		queryBuilder.where().eq("type1",previousFile).and().eq("type2", newFile);
+		PreparedQuery<MatchesData> preparedQuery = queryBuilder.prepare();
+		List<MatchesData> checkDataList = matchDao.query(preparedQuery);
+		Log.d("Check", checkDataList.isEmpty()+"");
+        if(checkDataList.isEmpty()==true)
+        {
 		//MatchesData matches2 = new MatchesData(newFile, previousFile);
 		matchDao.create(matches1);
 		//matchDao.create(matches2);
-		
+        }
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}

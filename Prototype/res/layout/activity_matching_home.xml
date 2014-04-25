@@ -17,7 +17,7 @@
         android:layout_marginBottom="74dp" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/buttonDoneExpert"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignParentLeft="true"
@@ -29,9 +29,9 @@
         android:id="@+id/button2"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_toRightOf="@+id/button1"
+        android:layout_alignBaseline="@+id/buttonDoneExpert"
+        android:layout_alignBottom="@+id/buttonDoneExpert"
+        android:layout_toRightOf="@+id/buttonDoneExpert"
         android:onClick="moveToShortSleeveShirtsHome"
         android:background="@drawable/emme_shortsleeves"/>
 
@@ -39,8 +39,8 @@
         android:id="@+id/button3"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
+        android:layout_alignLeft="@+id/buttonDoneExpert"
+        android:layout_below="@+id/buttonDoneExpert"
         android:onClick="moveToPantsHome"
         android:background="@drawable/emme_pants" />
 

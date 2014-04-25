@@ -47,6 +47,11 @@ public class ExpertHome1 extends Activity {
 		Intent move = new Intent(this, EditHome1.class);
 		startActivity(move);
 	}
+	
+	public void moveToMainActivity(View view){
+		Intent move = new Intent(this, EditHome1.class);
+		startActivity(move);
+	}
 
 
 	public void moveToCamera(View view) {
