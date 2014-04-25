@@ -38,5 +38,6 @@
     <string name="title_activity_skirts_match_home">SkirtsMatchHome</string>
     <string name="title_activity_long_sleeve_shirts_match_home">LongSleeveShirtsMatchHome</string>
     <string name="title_activity_long_sleeve_home">LongSleeveHome</string>
+    <string name="title_activity_delete_home">DeleteHome</string>
 
 </resources>

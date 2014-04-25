@@ -6,19 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.table.TableUtils;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -27,142 +26,113 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class LongSleeveShirtsMatchHome extends Activity {
+public class DeleteHome extends Activity {
 
-	private DatabaseHelper databaseHelper = null;
-	private DatabaseHelperM databaseHelperM = null;
-	List<SimpleData> dataList;
+	public String filePathOriginal;
+	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	public DatabaseHelperM databaseHelperM = null;
+	List<MatchesData> dataList;
 	ArrayList<String> filePathList;
-
 	public Bitmap bitmap;
 	private Context mContext;
 	public Bitmap[] bits;
-	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
-	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
-	public String filePathOriginal;
-	public String new_filepath;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_long_sleeve_shirts_match_home);
-		dataList = checkDatabaseType();
-		filePathList = new ArrayList<String>(dataList.size());
-
+		setContentView(R.layout.activity_delete_home);
+		
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
-		filePathOriginal = bundle.getString(EXTRA_MESSAGE2);
-		Log.d("original filepath", filePathOriginal);
+		filePathOriginal = bundle.getString(EXTRA_MESSAGE);
+	
+		dataList = checkDatabase();
+		filePathList = new ArrayList<String>(dataList.size());
 		
-		for (SimpleData data: dataList){
-			String filePath = data.fileName;
+		for (MatchesData data: dataList){
+			String filePath = data.type2;
+			Log.d("filePath", filePath);
 			filePathList.add(filePath);
 		}
 		
 		GridView gridView = (GridView)findViewById(R.id.gridView2);
 		
+
 		gridView.setAdapter(new ImageAdapterPartial(this));
+		
 		gridView.setOnItemClickListener (new OnItemClickListener(){
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
-	    new_filepath = filePathList.get(position);
+	    String filePath = filePathList.get(position);
+	    moveToNewEntryHome(v,filePath);
 	    
-	    loadItemIntoDatabase(filePathOriginal, new_filepath);
-	    moveToLongSleeveHome(v);
-	    	 }
-	    	 
 	    }
+	    }
+	    		 );
+	}
+
 		
-				);
-	}
-	
-	public void moveToLongSleeveHome(View view) {
+	public void moveToNewEntryHome(View view, String filePath){
+		try {
 		Intent move = new Intent(this, NewEntryHome.class);
-		move.putExtra("BitmapImage", bitmap);
 		move.putExtra(EXTRA_MESSAGE, filePathOriginal);
+		Dao<MatchesData, Integer> matchDao = getHelperM().getMatchesDataDao();
+		
+		DeleteBuilder<MatchesData, Integer> deleteBuilder = matchDao.deleteBuilder();
+		deleteBuilder.where().eq("type2", filePath);
+		deleteBuilder.delete();
 		startActivity(move);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
-	
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.long_sleeve_shirts_match_home, menu);
+		getMenuInflater().inflate(R.menu.delete_home, menu);
 		return true;
+	}
+
+	public List<MatchesData> checkDatabase(){
+		try {
+			Dao<MatchesData, Integer> matchesDao = getHelperM().getMatchesDataDao();
+			QueryBuilder<MatchesData,Integer> queryBuilder = matchesDao.queryBuilder();
+			queryBuilder.where().eq("type1", filePathOriginal);
+			PreparedQuery<MatchesData> preparedQuery = queryBuilder.prepare();
+			List<MatchesData> dataList = matchesDao.query(preparedQuery);
+			return dataList;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
+
+	protected void onDestroy(){
+		super.onDestroy();
+		if(databaseHelperM!=null){
+			databaseHelperM.close();
+			databaseHelperM = null;
+		}
 	}
 	
 	private DatabaseHelperM getHelperM(){
-		if (databaseHelperM == null){
+		if(databaseHelperM == null){
 			databaseHelperM = DatabaseHelperM.getHelper(this);
+			
 		}
 		return databaseHelperM;
 	}
 	
-//adding entries to matches table in db	
-public void loadItemIntoDatabase(String previousFile, String newFile){
-	try {
-		Dao<MatchesData, Integer> matchDao = getHelperM().getMatchesDataDao();
-		MatchesData matches1 = new MatchesData(previousFile, newFile);
-		QueryBuilder<MatchesData,Integer> queryBuilder = matchDao.queryBuilder();
-		queryBuilder.where().eq("type1",previousFile).and().eq("type2", newFile);
-		PreparedQuery<MatchesData> preparedQuery = queryBuilder.prepare();
-		List<MatchesData> checkDataList = matchDao.query(preparedQuery);
-		Log.d("Check", checkDataList.isEmpty()+"");
-        if(checkDataList.isEmpty()==true)
-        {
-		//MatchesData matches2 = new MatchesData(newFile, previousFile);
-		matchDao.create(matches1);
-		//matchDao.create(matches2);
-        }
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
 	
-}
-
-protected void onDestroy(){
-	super.onDestroy();
-	if(databaseHelper!=null){
-		databaseHelper.close();
-		databaseHelper = null;
-	}
-	
-	if(databaseHelperM!=null){
-		databaseHelperM.close();
-		databaseHelperM =null;
-	}
-	
-}
-
-private DatabaseHelper getHelper(){
-	if (databaseHelper == null){
-		databaseHelper = DatabaseHelper.getHelper(this);
-	}
-	return databaseHelper;
-}
-
-
-
-public List<SimpleData> checkDatabaseType(){
-	try {
-		Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
-		QueryBuilder<SimpleData,Integer> queryBuilder = simpleDao.queryBuilder();
-		queryBuilder.where().eq("type", "Long Sleeve Shirts");
-		PreparedQuery<SimpleData> preparedQuery = queryBuilder.prepare();
-		List<SimpleData> dataList = simpleDao.query(preparedQuery);
-		return dataList;
-	} catch (SQLException e) {
-		
-		e.printStackTrace();
-	}
-	return null;
-	
-}
-
 private class ImageAdapterPartial extends BaseAdapter{	
 	
 	public int calculateInSampleSize(BitmapFactory.Options options, int reqHeight, int reqWidth){
@@ -191,10 +161,10 @@ public ImageAdapterPartial(Context c){
 		
 	    for (int i=0; i< filePathList.size(); i++){  
 	    	try {
-	    	//Log.d("FilePath", filePathList.get(i));
+	    	Log.d("FilePath", filePathList.get(i));
 	    	Bitmap bitmap = decodeBitmap(filePathList.get(i),250,250);
 	    	if (bitmap == null){
-	    		//Log.d("ERROR", "BITMAP IS NULL");
+	    		Log.d("ERROR", "BITMAP IS NULL");
 	    	}
 	    	int pictureRotation;
 			pictureRotation = getPictureRotation(filePathList.get(i));
@@ -207,8 +177,7 @@ public ImageAdapterPartial(Context c){
 			}
         }
 	}
-
-
+	
 	private int exifToDegrees(int exifOrientation) {        
 	    if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) { return 90; } 
 	    else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180) {  return 180; } 
@@ -216,13 +185,15 @@ public ImageAdapterPartial(Context c){
 	    return 0;    
 	 }
 	
+	
+	
 	public int getPictureRotation(String path) throws IOException{
 		ExifInterface exif = new ExifInterface(path);
     	int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
     	int rotationInDegrees = exifToDegrees(rotation);
     	return rotationInDegrees;
 	}
-	//out of memory
+	
 	public Bitmap decodeBitmap(String names, int reqWidth, int reqHeight) {
 		
 		BitmapFactory.Options options = new BitmapFactory.Options();
@@ -241,8 +212,6 @@ public ImageAdapterPartial(Context c){
 	public Object getItem(int position){
 	    return bits[position];
 	}
-	
-	
 
 	@Override
 	public long getItemId(int position){
@@ -263,3 +232,4 @@ public ImageAdapterPartial(Context c){
 }
 
 }
+

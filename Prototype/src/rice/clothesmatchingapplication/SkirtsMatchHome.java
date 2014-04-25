@@ -63,7 +63,7 @@ public class SkirtsMatchHome extends Activity {
 			filePathList.add(filePath);
 		}
 		
-		GridView gridView = (GridView)findViewById(R.id.gridView1);
+		GridView gridView = (GridView)findViewById(R.id.gridView2);
 		
 		gridView.setAdapter(new ImageAdapterPartial(this));
 		gridView.setOnItemClickListener (new OnItemClickListener(){

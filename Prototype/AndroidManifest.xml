@@ -101,6 +101,10 @@
             android:name="rice.clothesmatchingapplication.ImagesHome"
             android:label="@string/title_activity_long_sleeve_home" >
         </activity>
+        <activity
+            android:name="rice.clothesmatchingapplication.DeleteHome"
+            android:label="@string/title_activity_delete_home" >
+        </activity>
     </application>
 
 </manifest>
