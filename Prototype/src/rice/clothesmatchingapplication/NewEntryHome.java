@@ -54,22 +54,23 @@ public class NewEntryHome extends Activity {
 		ArrayList<String> filePathList;
 
 	
-			Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
-			String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Skirts", "Shoes"};
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
-			dropdown.setAdapter(adapter);
+		Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
+		String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Skirts", "Shoes"};
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+		dropdown.setAdapter(adapter);
 			
-			Intent moveFrom =  getIntent();
-			Bundle bundle  = moveFrom.getExtras();
-			if (bundle.getString(EXTRA_MESSAGE).equals("picture")==false);{
+		Intent moveFrom =  getIntent();
+		Bundle bundle  = moveFrom.getExtras();
+			
+		if (bundle.getString(EXTRA_MESSAGE).equals("picture")==false);{
 			filePathOriginal = bundle.getString(EXTRA_MESSAGE);
 			Log.d("FilePath", filePathOriginal);
 			}
 			filePath = filepath.getString("file", "");
 			
 			File imageFile = new File(filePath);
-		    if (imageFile.exists()) {
-		        loadIntoImageview(filePath);
+		if (imageFile.exists()) {
+		    loadIntoImageview(filePath);
 		    }
 		    
 		    if (filePathOriginal.equals("picture")==false){

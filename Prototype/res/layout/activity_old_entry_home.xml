@@ -23,6 +23,7 @@
         android:layout_height="75dp"
         android:layout_alignLeft="@+id/buttonDoneMatchEditing"
         android:layout_below="@+id/buttonDoneMatchEditing"
+        android:onClick="moveToDeleteHome"
         android:background="@drawable/emme_delete" />
 
     <Button
@@ -43,5 +44,29 @@
         android:layout_below="@+id/button2"
         android:onClick="moveToExpertHome1"
         android:background="@drawable/emme_done" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/buttonDone" >
+
+        <LinearLayout
+            android:id="@+id/mygallery2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/DeleteEntryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/buttonDone"
+        android:layout_alignLeft="@+id/horizontalScrollView1"
+        android:onClick = "deleteEntry"
+        android:text="@string/deleteEntry" />
 
 </RelativeLayout>
