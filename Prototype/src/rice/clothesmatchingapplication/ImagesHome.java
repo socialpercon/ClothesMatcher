@@ -36,7 +36,7 @@ public class ImagesHome extends Activity {
 	public String category;
 	public String original_file;
 	public String match_file;
-	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	public static final String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
 	
 	public ImagesHome() {
@@ -59,7 +59,6 @@ public class ImagesHome extends Activity {
 //		Bitmap bitmap = (Bitmap) intent.getParcelableExtra("BitmapImage");
 		//ImageView imageView = (ImageView) findViewById(R.id.imageView1);
 		//imageView.setImageBitmap(bitmap);
-				
 		
 		Bundle bundle = intent.getExtras();
 		original_file = bundle.getString(EXTRA_MESSAGE);

@@ -40,6 +40,7 @@ public class NewEntryHome extends Activity {
 	private DatabaseHelperM databaseHelperM = null;
 	public static final String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
+	public static final String EXTRA_MESSAGE3 = "rice.clothesmatchingapplication.MESSAGE3";
 	public String filePath;
 	public SharedPreferences filepath; 
 	public String filePathOriginal;
@@ -129,6 +130,7 @@ public class NewEntryHome extends Activity {
 	public void moveToMatchingHome(View view){
 		Intent move = new Intent(this, MatchingHome.class);
 		move.putExtra(EXTRA_MESSAGE, filePath);
+		move.putExtra(EXTRA_MESSAGE3, "new");
 		startActivity(move);
 	}
 	

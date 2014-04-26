@@ -13,6 +13,8 @@ public class MatchingHome extends Activity {
 
 	public final static String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	public final static String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
+	public static final String EXTRA_MESSAGE3 = "rice.clothesmatchingapplication.MESSAGE3";
+	public String oldOrNew;
 	public String filePath;
 	
 	@Override
@@ -22,6 +24,7 @@ public class MatchingHome extends Activity {
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 		filePath = bundle.getString(EXTRA_MESSAGE);
+		oldOrNew = bundle.getString(EXTRA_MESSAGE3);
 	}
 		
 	@Override
@@ -35,6 +38,7 @@ public class MatchingHome extends Activity {
 	public void moveToLongSleeveShirtsHome(View view){
 		Intent move = new Intent(this, LongSleeveShirtsMatchHome.class);
 		move.putExtra(EXTRA_MESSAGE2, filePath);
+		move.putExtra(EXTRA_MESSAGE3, oldOrNew);
 		startActivity(move);
 		
 	}
@@ -42,6 +46,7 @@ public class MatchingHome extends Activity {
 	public void moveToShortSleeveShirtsHome(View view){
 		Intent move = new Intent(this, ShortSleeveShirtsMatchHome.class);
 		move.putExtra(EXTRA_MESSAGE2, filePath);
+		move.putExtra(EXTRA_MESSAGE3, oldOrNew);
 		startActivity(move);
 		
 	}
@@ -50,6 +55,7 @@ public class MatchingHome extends Activity {
 	public void moveToPantsHome(View view){
 		Intent move = new Intent(this, PantsMatchHome.class);
 		move.putExtra(EXTRA_MESSAGE2, filePath);
+		move.putExtra(EXTRA_MESSAGE3, oldOrNew);
 		startActivity(move);
 		
 	}
@@ -58,6 +64,7 @@ public class MatchingHome extends Activity {
 	public void moveToSkirtsHome(View view){
 		Intent move = new Intent(this, SkirtsMatchHome.class);
 		move.putExtra(EXTRA_MESSAGE2, filePath);
+		move.putExtra(EXTRA_MESSAGE3, oldOrNew);
 		startActivity(move);
 		
 	}
@@ -66,6 +73,7 @@ public class MatchingHome extends Activity {
 	public void moveToShoesHome(View view){
 		Intent move = new Intent(this, ShoesMatchHome.class);
 		move.putExtra(EXTRA_MESSAGE2, filePath);
+		move.putExtra(EXTRA_MESSAGE3, oldOrNew);
 		startActivity(move);
 		
 	}

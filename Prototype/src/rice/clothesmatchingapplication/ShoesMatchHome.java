@@ -40,10 +40,12 @@ public class ShoesMatchHome extends Activity {
 	public Bitmap bitmap;
 	private Context mContext;
 	public Bitmap[] bits;
-	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	public static final String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
 	public static final String EXTRA_MESSAGE2 = "rice.clothesmatchingapplication.MESSAGE2";
+	public static final String EXTRA_MESSAGE3 = "rice.clothesmatchingapplication.MESSAGE3";
 	public String filePathOriginal;
 	public String new_filepath;
+	public String oldOrNew;
 	
 	
 	@Override
@@ -56,6 +58,7 @@ public class ShoesMatchHome extends Activity {
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 		filePathOriginal = bundle.getString(EXTRA_MESSAGE2);
+		oldOrNew = bundle.getString(EXTRA_MESSAGE3);
 		Log.d("original filepath", filePathOriginal);
 		
 		for (SimpleData data: dataList){
@@ -81,7 +84,13 @@ public class ShoesMatchHome extends Activity {
 	}
 	
 	public void moveToLongSleeveHome(View view) {
-		Intent move = new Intent(this, NewEntryHome.class);
+		Intent move = new Intent();
+		if (oldOrNew.equals("old")==true){
+		move = new Intent(this, OldEntryHome.class);
+		}
+		if (oldOrNew.equals("new")==true){
+		move = new Intent(this, NewEntryHome.class);
+		}
 		move.putExtra("BitmapImage", bitmap);
 		move.putExtra(EXTRA_MESSAGE, filePathOriginal);
 		startActivity(move);

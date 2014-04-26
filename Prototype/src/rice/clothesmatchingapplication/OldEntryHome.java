@@ -47,6 +47,8 @@ public static OldEntryHome instance;
 	public ImageAdapter imageAdapter; 
 	public String filePath;
 	public static final String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	public static final String EXTRA_MESSAGE3 = "rice.clothesmatchingapplication.MESSAGE3";
+	
 	private DatabaseHelperM databaseHelperM = null;
 	
 	@Override
@@ -168,6 +170,7 @@ public static OldEntryHome instance;
 	public void moveToMatchingHome(View view){
 		Intent move = new Intent(this, MatchingHome.class);
 		move.putExtra(EXTRA_MESSAGE, filePath);
+		move.putExtra(EXTRA_MESSAGE3, "old");
 		startActivity(move);
 	}
 	
