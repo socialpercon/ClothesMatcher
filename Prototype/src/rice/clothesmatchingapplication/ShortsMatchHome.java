@@ -163,7 +163,7 @@ public List<SimpleData> checkDatabaseType(){
 	try {
 		Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
 		QueryBuilder<SimpleData,Integer> queryBuilder = simpleDao.queryBuilder();
-		queryBuilder.where().eq("type", "Skirts");
+		queryBuilder.where().eq("type", "Shorts");
 		PreparedQuery<SimpleData> preparedQuery = queryBuilder.prepare();
 		List<SimpleData> dataList = simpleDao.query(preparedQuery);
 		return dataList;
