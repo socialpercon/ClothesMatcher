@@ -56,7 +56,7 @@ public class NewEntryHome extends Activity {
 
 	
 		Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
-		String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Skirts", "Shoes"};
+		String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Shorts"};
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
 		dropdown.setAdapter(adapter);
 			

@@ -66,7 +66,7 @@
             android:label="@string/title_activity_pants_home" >
         </activity>
         <activity
-            android:name="rice.clothesmatchingapplication.SkirtsHome"
+            android:name="rice.clothesmatchingapplication.ShortsHome"
             android:label="@string/title_activity_skirts_home" >
         </activity>
         <activity
@@ -90,7 +90,7 @@
             android:label="@string/title_activity_short_sleeve_shirts_match_home" >
         </activity>
         <activity
-            android:name="rice.clothesmatchingapplication.SkirtsMatchHome"
+            android:name="rice.clothesmatchingapplication.ShortsMatchHome"
             android:label="@string/title_activity_skirts_match_home" >
         </activity>
         <activity

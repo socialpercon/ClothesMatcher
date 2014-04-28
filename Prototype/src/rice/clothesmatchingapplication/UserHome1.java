@@ -32,7 +32,7 @@ public class UserHome1 extends Activity {
 	}
 	
 	public void moveToSkirtsHome(View view){
-		Intent move = new Intent(this, SkirtsHome.class);
+		Intent move = new Intent(this, ShortsHome.class);
 		startActivity(move);
 	}
 	

@@ -62,7 +62,7 @@ public class MatchingHome extends Activity {
 	
 
 	public void moveToSkirtsHome(View view){
-		Intent move = new Intent(this, SkirtsMatchHome.class);
+		Intent move = new Intent(this, ShortsMatchHome.class);
 		move.putExtra(EXTRA_MESSAGE2, filePath);
 		move.putExtra(EXTRA_MESSAGE3, oldOrNew);
 		startActivity(move);
