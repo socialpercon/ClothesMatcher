@@ -184,15 +184,17 @@ public class NewEntryHome extends Activity {
 	
 	protected void onDestroy(){
 		super.onDestroy();
-		if(databaseHelper==null){
+		if(databaseHelper!=null){
 			databaseHelper.close();
 			databaseHelper = null;
 		}
 		
-		if(databaseHelperM==null){
+		if(databaseHelperM!=null){
 			databaseHelperM.close();
 			databaseHelperM=null;
 		}
+		
+		
 	}
 	
 	private DatabaseHelper getHelper(){
@@ -286,4 +288,5 @@ public class NewEntryHome extends Activity {
 		return inSampleSize;
 	}
 
+	
 }
