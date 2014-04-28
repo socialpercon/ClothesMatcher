@@ -83,6 +83,9 @@ public class DeleteHome extends Activity {
 		DeleteBuilder<MatchesData, Integer> deleteBuilder = matchDao.deleteBuilder();
 		deleteBuilder.where().eq("type2", filePath);
 		deleteBuilder.delete();
+		deleteBuilder.where().eq("type2", filePathOriginal).and().eq("type1", filePath);
+		deleteBuilder.delete();
+		
 		startActivity(move);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

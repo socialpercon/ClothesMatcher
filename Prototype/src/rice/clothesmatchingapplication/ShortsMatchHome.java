@@ -122,10 +122,12 @@ public void loadItemIntoDatabase(String previousFile, String newFile){
 		Log.d("Check", checkDataList.isEmpty()+"");
         if(checkDataList.isEmpty()==true)
         {
-		//MatchesData matches2 = new MatchesData(newFile, previousFile);
+		MatchesData matches2 = new MatchesData(newFile, previousFile);
 		matchDao.create(matches1);
-		//matchDao.create(matches2);
+		matchDao.create(matches2);
         }
+        
+        
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
