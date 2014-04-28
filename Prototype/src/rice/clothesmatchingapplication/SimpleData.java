@@ -3,7 +3,7 @@ package rice.clothesmatchingapplication;
 import com.j256.ormlite.field.DatabaseField;
 
 public class SimpleData {
-@DatabaseField
+@DatabaseField(columnName = "name")
 String fileName;
 @DatabaseField(columnName = "type")
 String type;

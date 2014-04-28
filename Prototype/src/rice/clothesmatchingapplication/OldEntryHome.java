@@ -158,6 +158,11 @@ public static OldEntryHome instance;
 		DeleteBuilder<MatchesData,Integer> deleteBuilder = matchesDao.deleteBuilder();
 		deleteBuilder.where().eq("type1", filePath).or().eq("type2", filePath);
 		deleteBuilder.delete();
+		Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
+		DeleteBuilder<SimpleData,Integer> deleteBuilderType = simpleDao.deleteBuilder();
+		deleteBuilderType.where().eq("name", filePath);
+		deleteBuilderType.delete();
+		
 		File file = new File(filePath);
 		file.delete();
 		startActivity(move);
@@ -176,12 +181,23 @@ public static OldEntryHome instance;
 		return databaseHelperM;
 	}
 	
+	private DatabaseHelper getHelper(){
+		if(databaseHelper == null){
+			databaseHelper = DatabaseHelper.getHelper(this);
+		}
+		return databaseHelper;
+	}
 	
 	protected void onDestroy(){
 		super.onDestroy();
 		if(databaseHelperM==null){
 			databaseHelperM.close();
 			databaseHelperM=null;
+		}
+		
+		if(databaseHelper==null){
+			databaseHelper.close();
+			databaseHelper=null;
 		}
 	}
 
