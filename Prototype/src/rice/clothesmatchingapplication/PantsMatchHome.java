@@ -75,6 +75,7 @@ public class PantsMatchHome extends Activity {
 	    new_filepath = filePathList.get(position);
 	    
 	    loadItemIntoDatabase(filePathOriginal, new_filepath);
+	    
 	    moveToLongSleeveHome(v);
 	    	 }
 	    	 
@@ -114,6 +115,7 @@ public class PantsMatchHome extends Activity {
 //adding entries to matches table in db	
 public void loadItemIntoDatabase(String previousFile, String newFile){
 	try {
+		if (previousFile.equals(newFile)==false){
 		Dao<MatchesData, Integer> matchDao = getHelperM().getMatchesDataDao();
 		MatchesData matches1 = new MatchesData(previousFile, newFile);
 		QueryBuilder<MatchesData,Integer> queryBuilder = matchDao.queryBuilder();
@@ -126,6 +128,7 @@ public void loadItemIntoDatabase(String previousFile, String newFile){
 		MatchesData matches2 = new MatchesData(newFile, previousFile);
 		matchDao.create(matches1);
 		matchDao.create(matches2);
+        }
         }
         } catch (SQLException e) {
 		e.printStackTrace();

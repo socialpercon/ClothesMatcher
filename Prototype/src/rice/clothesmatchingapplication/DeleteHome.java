@@ -31,13 +31,15 @@ import android.widget.AdapterView.OnItemClickListener;
 public class DeleteHome extends Activity {
 
 	public String filePathOriginal;
-	public String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	public static final String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
+	public static final String EXTRA_MESSAGE3 = "rice.clothesmatchingapplication.MESSAGE3";
 	public DatabaseHelperM databaseHelperM = null;
 	List<MatchesData> dataList;
 	ArrayList<String> filePathList;
 	public Bitmap bitmap;
 	private Context mContext;
 	public Bitmap[] bits;
+	public String oldOrNew;
 	
 	
 	@Override
@@ -48,6 +50,7 @@ public class DeleteHome extends Activity {
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 		filePathOriginal = bundle.getString(EXTRA_MESSAGE);
+		oldOrNew = bundle.getString(EXTRA_MESSAGE3);
 	
 		dataList = checkDatabase();
 		filePathList = new ArrayList<String>(dataList.size());
@@ -76,7 +79,13 @@ public class DeleteHome extends Activity {
 		
 	public void moveToNewEntryHome(View view, String filePath){
 		try {
-		Intent move = new Intent(this, NewEntryHome.class);
+		Intent move = new Intent();
+		if (oldOrNew.equals("new")==true){
+		move = new Intent(this, NewEntryHome.class);
+		}
+		if (oldOrNew.equals("old")==true){
+		move = new Intent(this, OldEntryHome.class);
+		}
 		move.putExtra(EXTRA_MESSAGE, filePathOriginal);
 		Dao<MatchesData, Integer> matchDao = getHelperM().getMatchesDataDao();
 		

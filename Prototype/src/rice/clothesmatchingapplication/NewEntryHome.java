@@ -223,6 +223,7 @@ public class NewEntryHome extends Activity {
 	public void moveToDeleteHome(View view){
 		Intent move = new Intent(this, DeleteHome.class);
 		move.putExtra(EXTRA_MESSAGE, filePath);
+		move.putExtra(EXTRA_MESSAGE3, "new");
 		startActivity(move);
 	}
 	public void loadIntoImageview(String path){

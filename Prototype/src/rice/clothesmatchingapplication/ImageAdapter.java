@@ -19,7 +19,7 @@ import android.media.ExifInterface;
 public class ImageAdapter extends BaseAdapter{
 
 	private Context mContext;
-	//public Bitmap[] bits;
+	public Bitmap[] bits;
 	public String[] filePaths;
 	
 	public static int calculateInSampleSize(BitmapFactory.Options options, int reqHeight, int reqWidth){
@@ -46,25 +46,25 @@ public class ImageAdapter extends BaseAdapter{
 		File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
 		File[] names = directory.listFiles();
 		Log.d("Files", "Size: "+ names.length);
-		//bits = new Bitmap[names.length];
+		bits = new Bitmap[names.length];
 		filePaths = new String[names.length];
 		
 	    mContext = c;
 	    
 	    for (int i=0; i< names.length; i++){
-//	    	try {
+	    	try {
 	    	filePaths[i] = names[i].getAbsolutePath();
 	    	Log.d("FilePath", names[i].getAbsolutePath());
-//	    	Bitmap bitmap = decodeBitmap(names[i].getAbsolutePath(),250,250);
-//	    	int pictureRotation;
-//				pictureRotation = getPictureRotation(names[i].getAbsolutePath());
-//	    	Matrix matrix = new Matrix();
-//	    	matrix.postRotate(pictureRotation);
-//	    	bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-//	    	bits[i]=bitmap;
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+	    	Bitmap bitmap = decodeBitmap(names[i].getAbsolutePath(),250,250);
+	    	int pictureRotation;
+				pictureRotation = getPictureRotation(names[i].getAbsolutePath());
+	    	Matrix matrix = new Matrix();
+	    	matrix.postRotate(pictureRotation);
+	    	bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+	    	bits[i]=bitmap;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
         }
 	}
 	//need to add method to return position
@@ -117,9 +117,8 @@ public class ImageAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
 
-	    ImageView imageView = new ImageView(mContext);
-	    imageView.setImageURI(Uri.fromFile(new File(filePaths[position])));
-//	    imageView.setImageBitmap(bits[position]);
+		ImageView imageView = new ImageView(mContext);
+	    imageView.setImageBitmap(bits[position]);
 	    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 	    imageView.setLayoutParams(new GridView.LayoutParams(250, 250));
 	    return imageView;
