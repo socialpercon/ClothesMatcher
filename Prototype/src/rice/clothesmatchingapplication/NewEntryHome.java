@@ -103,7 +103,7 @@ public class NewEntryHome extends Activity {
 			Matrix matrix = new Matrix();
 			matrix.postRotate(pictureRotation);
 			bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-			 
+			//reducing bm
 			
 		    LinearLayout layout = new LinearLayout(getApplicationContext());
 		    layout.setLayoutParams(new LayoutParams(250, 250));
