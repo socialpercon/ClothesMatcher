@@ -48,7 +48,6 @@ public class ImageAdapter extends BaseAdapter{
 		File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
 		File[] names = directory.listFiles();
 		Log.d("Files", "Size: "+ names.length);
-		//bits = new Bitmap[names.length];
 		filePaths = new String[names.length];
 		
 	    mContext = c;
@@ -111,7 +110,6 @@ public class ImageAdapter extends BaseAdapter{
 		  Log.d(TAG, "Initializing the image view.");
 		}
 		String url = filePaths[position];
-
 		Log.d(TAG, url);
 		Picasso.with(mContext)
 			.load(new File(url))

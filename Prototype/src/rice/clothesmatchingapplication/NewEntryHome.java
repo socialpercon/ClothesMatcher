@@ -56,7 +56,7 @@ public class NewEntryHome extends Activity {
 
 	
 		Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
-		String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Skirts", "Shoes"};
+		String[] items = new String[]{"Long Sleeve Shirts", "Short Sleeve Shirts", "Pants", "Shorts"};
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
 		dropdown.setAdapter(adapter);
 			
@@ -184,15 +184,17 @@ public class NewEntryHome extends Activity {
 	
 	protected void onDestroy(){
 		super.onDestroy();
-		if(databaseHelper==null){
+		if(databaseHelper!=null){
 			databaseHelper.close();
 			databaseHelper = null;
 		}
 		
-		if(databaseHelperM==null){
+		if(databaseHelperM!=null){
 			databaseHelperM.close();
 			databaseHelperM=null;
 		}
+		
+		
 	}
 	
 	private DatabaseHelper getHelper(){
@@ -221,6 +223,7 @@ public class NewEntryHome extends Activity {
 	public void moveToDeleteHome(View view){
 		Intent move = new Intent(this, DeleteHome.class);
 		move.putExtra(EXTRA_MESSAGE, filePath);
+		move.putExtra(EXTRA_MESSAGE3, "new");
 		startActivity(move);
 	}
 	public void loadIntoImageview(String path){
@@ -286,4 +289,5 @@ public class NewEntryHome extends Activity {
 		return inSampleSize;
 	}
 
+	
 }

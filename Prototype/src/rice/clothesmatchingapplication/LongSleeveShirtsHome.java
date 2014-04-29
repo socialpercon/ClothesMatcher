@@ -61,8 +61,6 @@ public class LongSleeveShirtsHome extends Activity {
 		//onclick for a picture in gridview
 		gridView.setOnItemClickListener (new OnItemClickListener(){
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	    v.buildDrawingCache();
-	    bitmap = v.getDrawingCache();
 	    String filePath = filePathList.get(position);
 	    
 	    moveToLongSleeveHome(v,filePath);
@@ -74,7 +72,6 @@ public class LongSleeveShirtsHome extends Activity {
 	
 	public void moveToLongSleeveHome(View view, String filePath) {
 		Intent move = new Intent(this, ImagesHome.class);
-		move.putExtra("BitmapImage", bitmap);
 		move.putExtra(EXTRA_MESSAGE, filePath);
 		startActivity(move);
 	}

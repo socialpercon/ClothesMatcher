@@ -12,10 +12,12 @@
         android:id="@+id/buttonToUserHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:onClick="moveToUserHome"
-        android:background="@drawable/emme_whitelogo_vert" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/emme_whitelogo_vert"
+        android:onClick="moveToUserHome" />
 
     <Button
         android:id="@+id/buttonToExpertHome"

@@ -61,12 +61,9 @@ public static OldEntryHome instance;
 		ArrayList<String> filePathList;
 		
 		Intent intent = getIntent();
-		Bitmap bitmap = (Bitmap) intent.getParcelableExtra("BitmapImage");
 		Bundle bundle = intent.getExtras();
 		filePath = bundle.getString(EXTRA_MESSAGE);
-		
-		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
-		imageView.setImageBitmap(bitmap);
+		loadIntoImageView(filePath);
 		
 	    dataList = checkDatabaseType();
 		filePathList = new ArrayList<String>(dataList.size());
@@ -131,6 +128,28 @@ public static OldEntryHome instance;
 		return null;
 
 	}
+	
+	public void loadIntoImageView(String path){
+		try {
+		Log.d("Path", "Path: " + path);
+		Bitmap bitmap = decodeBitmap(path,250,250);
+		
+		int pictureRotation;
+		
+			pictureRotation = getPictureRotation(path);
+		Matrix matrix = new Matrix();
+		matrix.postRotate(pictureRotation);
+		bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+	
+		ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+		imageView.setImageBitmap(bitmap);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 	public void deleteEntry(View v){
 		try{
@@ -139,6 +158,11 @@ public static OldEntryHome instance;
 		DeleteBuilder<MatchesData,Integer> deleteBuilder = matchesDao.deleteBuilder();
 		deleteBuilder.where().eq("type1", filePath).or().eq("type2", filePath);
 		deleteBuilder.delete();
+		Dao<SimpleData, Integer> simpleDao = getHelper().getSimpleDataDao();
+		DeleteBuilder<SimpleData,Integer> deleteBuilderType = simpleDao.deleteBuilder();
+		deleteBuilderType.where().eq("name", filePath);
+		deleteBuilderType.delete();
+		
 		File file = new File(filePath);
 		file.delete();
 		startActivity(move);
@@ -157,12 +181,23 @@ public static OldEntryHome instance;
 		return databaseHelperM;
 	}
 	
+	private DatabaseHelper getHelper(){
+		if(databaseHelper == null){
+			databaseHelper = DatabaseHelper.getHelper(this);
+		}
+		return databaseHelper;
+	}
 	
 	protected void onDestroy(){
 		super.onDestroy();
 		if(databaseHelperM==null){
 			databaseHelperM.close();
 			databaseHelperM=null;
+		}
+		
+		if(databaseHelper==null){
+			databaseHelper.close();
+			databaseHelper=null;
 		}
 	}
 
@@ -184,6 +219,7 @@ public static OldEntryHome instance;
 	public void moveToDeleteHome(View view){
 		Intent move = new Intent(this, DeleteHome.class);
 		move.putExtra(EXTRA_MESSAGE, filePath);
+		move.putExtra(EXTRA_MESSAGE3, "old");
 		startActivity(move);
 	}
 

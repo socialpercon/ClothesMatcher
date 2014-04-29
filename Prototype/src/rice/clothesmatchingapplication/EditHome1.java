@@ -32,8 +32,7 @@ public class EditHome1 extends Activity {
 	     
 	    gridView.setOnItemClickListener (new OnItemClickListener(){
 	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	    v.buildDrawingCache();
-	    bitmap = v.getDrawingCache();
+	    
 	    filePath = filePaths[position];
 	    moveToOldEntryHome(v, filePath);
 	    
