@@ -21,13 +21,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class OldEntryHome extends Activity {
 
@@ -40,8 +38,7 @@ public static OldEntryHome instance;
 	public static Context getContext(){
 		return instance;
 	}
-	
-	private final String LOG_TAG = getClass().getSimpleName();
+
 	private DatabaseHelper databaseHelper = null;
 	public final String TAG = "OldEntryHome";
 	public ImageAdapter imageAdapter; 

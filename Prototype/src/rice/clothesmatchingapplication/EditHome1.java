@@ -1,8 +1,5 @@
 package rice.clothesmatchingapplication;
 
-import java.io.IOException;
-import java.util.List;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.Toast;
 
 public class EditHome1 extends Activity {
 

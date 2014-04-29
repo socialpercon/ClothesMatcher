@@ -40,5 +40,6 @@
     <string name="title_activity_long_sleeve_home">LongSleeveHome</string>
     <string name="title_activity_delete_home">DeleteHome</string>
     <string name="deleteEntry">Delete Entry</string>
+    <string name="Expert">Expert</string>
 
 </resources>

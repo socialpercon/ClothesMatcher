@@ -7,17 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import android.media.ExifInterface;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -27,7 +24,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,7 +31,7 @@ import android.widget.Spinner;
 
 public class NewEntryHome extends Activity {
 
-	private final String LOG_TAG = getClass().getSimpleName();
+
 	private DatabaseHelper databaseHelper = null;
 	private DatabaseHelperM databaseHelperM = null;
 	public static final String EXTRA_MESSAGE = "rice.clothesmatchingapplication.MESSAGE";
