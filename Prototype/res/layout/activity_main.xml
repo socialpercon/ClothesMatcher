@@ -2,10 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
     <Button
@@ -27,14 +23,5 @@
         android:layout_alignParentRight="true"
         android:onClick="moveToExpertHome"
         android:text="Expert"/>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/buttonToExpertHome"
-        android:text="@string/MainTitle"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
