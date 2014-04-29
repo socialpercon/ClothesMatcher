@@ -194,6 +194,11 @@ public static OldEntryHome instance;
 			databaseHelperM.close();
 			databaseHelperM=null;
 		}
+		
+		if(databaseHelper!=null){
+			databaseHelper.close();
+			databaseHelper=null;
+		}
 	}
 
 	
