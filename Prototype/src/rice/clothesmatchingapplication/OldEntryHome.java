@@ -190,14 +190,9 @@ public static OldEntryHome instance;
 	
 	protected void onDestroy(){
 		super.onDestroy();
-		if(databaseHelperM==null){
+		if(databaseHelperM!=null){
 			databaseHelperM.close();
 			databaseHelperM=null;
-		}
-		
-		if(databaseHelper==null){
-			databaseHelper.close();
-			databaseHelper=null;
 		}
 	}
 
