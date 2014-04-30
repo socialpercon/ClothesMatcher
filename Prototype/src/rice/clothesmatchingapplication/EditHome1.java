@@ -1,6 +1,9 @@
 package rice.clothesmatchingapplication;
 
+import java.io.File;
+
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,20 +24,41 @@ public class EditHome1 extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_home1);
+		File sdCard = Environment.getExternalStorageDirectory();
+		File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
+		File[] names = directory.listFiles();
 		GridView gridView = (GridView) findViewById(R.id.EditGridView);
 	    ImageAdapter imageAdapter = new ImageAdapter(this);
-		gridView.setAdapter(imageAdapter);
-		filePaths = imageAdapter.getFilePaths();
-	     
-	    gridView.setOnItemClickListener (new OnItemClickListener(){
-	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	    
-	    filePath = filePaths[position];
-	    moveToOldEntryHome(v, filePath);
-	    
+	   
+	    if (names.length == 0){
+	    	
 	    }
+	    else{
+	    	gridView.setAdapter(imageAdapter);
+			filePaths = imageAdapter.getFilePaths();
+		     
+		    gridView.setOnItemClickListener (new OnItemClickListener(){
+		    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		    
+		    filePath = filePaths[position];
+		    moveToOldEntryHome(v, filePath);
+		    
+		    }
+		    }
+		    		 );
 	    }
-	    		 );
+//		gridView.setAdapter(imageAdapter);
+//		filePaths = imageAdapter.getFilePaths();
+//	     
+//	    gridView.setOnItemClickListener (new OnItemClickListener(){
+//	    	 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+//	    
+//	    filePath = filePaths[position];
+//	    moveToOldEntryHome(v, filePath);
+//	    
+//	    }
+//	    }
+//	    		 );
 	}
 
 	@Override

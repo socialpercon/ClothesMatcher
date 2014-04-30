@@ -1,5 +1,6 @@
 package rice.clothesmatchingapplication;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.squareup.picasso.Picasso;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -207,9 +209,15 @@ public ImageAdapterPartial(Context c){
 	public View getView(int position, View convertView, ViewGroup parent){
 
 	    ImageView imageView = new ImageView(mContext);
-	    imageView.setImageBitmap(bits[position]);
-	    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-	    imageView.setLayoutParams(new GridView.LayoutParams(250, 250));
+	    String url = filePathList.get(position);
+	    Picasso.with(mContext)
+			.load(new File(url))
+			.centerCrop()
+			.resize(250, 250)
+			.into(imageView);
+//	    imageView.setImageBitmap(bits[position]);
+//	    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//	    imageView.setLayoutParams(new GridView.LayoutParams(250, 250));
 	    return imageView;
 	}
 
