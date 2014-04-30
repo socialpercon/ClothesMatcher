@@ -50,4 +50,9 @@ public class EditHome1 extends Activity {
 		move.putExtra(EXTRA_MESSAGE, filePath);
 		startActivity(move);
 	}
+	
+	public void moveToExpertHome1(View view){
+		Intent move = new Intent(this, ExpertHome1.class);
+		startActivity(move);
+	}
 }
