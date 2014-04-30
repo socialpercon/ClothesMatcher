@@ -44,15 +44,22 @@ public class ImageAdapter extends BaseAdapter{
 		File sdCard = Environment.getExternalStorageDirectory();
 		File directory = new File(sdCard.getAbsolutePath() + "/ClothesMatchingApplication");
 		File[] names = directory.listFiles();
-		Log.d("Files", "Size: "+ names.length);
-		filePaths = new String[names.length];
+		//Log.d("Files", "Size: "+ names.length);
 		
-	    mContext = c;
-	    
-	    for (int i=0; i< names.length; i++){
-	    	filePaths[i] = names[i].getAbsolutePath();
-	    	Log.d("FilePath", names[i].getAbsolutePath());
-        }
+		if(names.length == 0){
+			
+		}
+		else{
+			filePaths = new String[names.length];
+			
+		    mContext = c;
+		    
+		    for (int i=0; i< names.length; i++){
+		    	filePaths[i] = names[i].getAbsolutePath();
+		    	Log.d("FilePath", names[i].getAbsolutePath());
+	        }
+		}
+		
 	}
 	//need to add method to return position
 	public String[] getFilePaths(){
