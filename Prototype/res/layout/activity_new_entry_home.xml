@@ -19,7 +19,7 @@
 
     <Spinner
         android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button2"
         android:layout_alignParentLeft="true"
@@ -30,7 +30,7 @@
         android:layout_width="130dp"
         android:layout_height="75dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/spinner1"
+        android:layout_below="@+id/button2"
         android:onClick="moveToExpertHome"
         android:background="@drawable/emme_done_newbold" />
 
@@ -64,9 +64,8 @@
         android:id="@+id/imageViewMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/buttonDoneMatchEditing"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/spinner1"
         android:layout_alignLeft="@+id/spinner1"
         android:layout_marginLeft="28dp"
         android:src="@drawable/ic_launcher" />
