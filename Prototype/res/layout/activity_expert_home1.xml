@@ -29,11 +29,11 @@
 
     <Button
         android:id="@+id/buttonDoneExpert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/buttonDoneMatchEditing"
         android:onClick="moveToMainActivity"
-        android:text="@string/Done" />
+        android:background="@drawable/emme_done_newbold"/>
 
 </RelativeLayout>

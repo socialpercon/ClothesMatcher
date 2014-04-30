@@ -17,11 +17,11 @@
 
     <Button
         android:id="@+id/buttonToExpertHome"
-        android:layout_width="100dp"
-        android:layout_height="75dp"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="moveToExpertHome"
-        android:text="@string/Expert" />
+        android:background="@drawable/emme_expert_new" />
 
 </RelativeLayout>

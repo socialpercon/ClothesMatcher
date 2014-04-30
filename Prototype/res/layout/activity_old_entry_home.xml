@@ -19,31 +19,31 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="125dp"
+        android:layout_width="130dp"
         android:layout_height="75dp"
         android:layout_alignLeft="@+id/buttonDoneMatchEditing"
         android:layout_below="@+id/buttonDoneMatchEditing"
         android:onClick="moveToDeleteHome"
-        android:background="@drawable/emme_delete" />
+        android:background="@drawable/emme_delete_newbold" />
 
     <Button
         android:id="@+id/buttonDoneMatchEditing"
-        android:layout_width="125dp"
+        android:layout_width="130dp"
         android:layout_height="75dp"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/imageView1"
         android:onClick="moveToMatchingHome"
-        android:background="@drawable/emme_add" />
+        android:background="@drawable/emme_add_newbold" />
 
     <Button
         android:id="@+id/buttonDone"
-        android:layout_width="75dp"
+        android:layout_width="130dp"
         android:layout_height="75dp"
         android:layout_alignLeft="@+id/button2"
         android:layout_alignRight="@+id/button2"
         android:layout_below="@+id/button2"
         android:onClick="moveToExpertHome1"
-        android:background="@drawable/emme_done" />
+        android:background="@drawable/emme_done_newbold" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView1"
@@ -62,11 +62,11 @@
 
     <Button
         android:id="@+id/DeleteEntryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="75dp"
         android:layout_alignBottom="@+id/buttonDone"
         android:layout_alignLeft="@+id/horizontalScrollView1"
         android:onClick = "deleteEntry"
-        android:text="@string/deleteEntry" />
+        android:background="@drawable/emme_delete_entry" />
 
 </RelativeLayout>

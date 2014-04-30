@@ -10,12 +10,12 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="150dp"
+        android:layout_width="130dp"
         android:layout_height="75dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/buttonDoneMatchEditing"
         android:onClick="moveToDeleteHome"
-        android:background="@drawable/emme_delete" />
+        android:background="@drawable/emme_delete_newbold" />
 
     <Spinner
         android:id="@+id/spinner1"
@@ -27,12 +27,12 @@
 
     <Button
         android:id="@+id/buttonDone"
-        android:layout_width="75dp"
+        android:layout_width="130dp"
         android:layout_height="75dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/spinner1"
         android:onClick="moveToExpertHome"
-        android:background="@drawable/emme_done" />
+        android:background="@drawable/emme_done_newbold" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView1"
@@ -52,13 +52,13 @@
 
     <Button
         android:id="@+id/buttonDoneMatchEditing"
-        android:layout_width="150dp"
+        android:layout_width="130dp"
         android:layout_height="75dp"
         android:layout_alignLeft="@+id/button2"
         android:layout_alignParentTop="true"
         android:layout_marginTop="117dp"
         android:onClick="moveToMatchingHome"
-        android:background="@drawable/emme_add"/>
+        android:background="@drawable/emme_add_newbold"/>
 
     <ImageView
         android:id="@+id/imageViewMain"
