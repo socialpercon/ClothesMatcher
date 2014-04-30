@@ -36,21 +36,21 @@
         android:background="@drawable/emme_add_newbold" />
 
     <Button
-        android:id="@+id/buttonDone"
+        android:id="@+id/DeleteEntryButton"
         android:layout_width="130dp"
         android:layout_height="75dp"
         android:layout_alignLeft="@+id/button2"
         android:layout_alignRight="@+id/button2"
         android:layout_below="@+id/button2"
-        android:onClick="moveToExpertHome1"
-        android:background="@drawable/emme_done_newbold" />
+        android:onClick="deleteEntry"
+        android:background="@drawable/emme_delete_entry" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/buttonDone" >
+        android:layout_alignParentBottom="true" >
 
         <LinearLayout
             android:id="@+id/mygallery2"
@@ -61,12 +61,13 @@
     </HorizontalScrollView>
 
     <Button
-        android:id="@+id/DeleteEntryButton"
+        android:id="@+id/buttonDone"
         android:layout_width="130dp"
         android:layout_height="75dp"
-        android:layout_alignBottom="@+id/buttonDone"
-        android:layout_alignLeft="@+id/horizontalScrollView1"
-        android:onClick = "deleteEntry"
-        android:background="@drawable/emme_delete_entry" />
+        android:layout_alignLeft="@+id/DeleteEntryButton"
+        android:layout_alignRight="@+id/DeleteEntryButton"
+        android:layout_below="@+id/DeleteEntryButton"
+        android:onClick="moveToExpertHome1"
+        android:background="@drawable/emme_done_newbold" />
 
 </RelativeLayout>

@@ -66,6 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/buttonDoneMatchEditing"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/spinner1"
         android:layout_marginLeft="28dp"
         android:src="@drawable/ic_launcher" />
