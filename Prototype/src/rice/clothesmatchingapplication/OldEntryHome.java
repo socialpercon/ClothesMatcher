@@ -81,7 +81,7 @@ public static OldEntryHome instance;
 		
 	View insertPhoto(String path){
 		try {
-			
+		
 		Bitmap bm = decodeBitmap(path, 220, 220);
 	   	int pictureRotation;
 		pictureRotation = getPictureRotation(path);
